@@ -1,5 +1,4 @@
 name: Test
-
 on: [push, pull_request]
 
 jobs:
@@ -16,10 +15,6 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
           check-latest: true
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          gradle-home-cache-cleanup: true
       - name: Setup Cache
         uses: actions/cache@v4
         with:
@@ -30,7 +25,7 @@ jobs:
           key: ${{ runner.os }}-test-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
       - name: Build Artifacts
         run: ./gradlew build
-      - name: Upload Atrifacts
+      - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: artifacts

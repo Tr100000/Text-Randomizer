@@ -1,0 +1,34 @@
+{
+	"schemaVersion": 1,
+	"id": "text_randomizer",
+	"version": "${version}",
+	"name": "Text Randomizer",
+	"description": "Randomizes all translated text in Minecraft.",
+	"authors": [
+		"Tr100000"
+	],
+	"contact": {
+		"homepage": "https://github.com/Tr100000/text-randomizer",
+		"sources": "https://github.com/Tr100000/text-randomizer",
+        "issues": "https://github.com/Tr100000/text-randomizer/issues"
+	},
+	"license": "MIT",
+    "environment": "client",
+	"entrypoints": {
+		"client": [
+			"io.github.tr100000.text_randomizer.TextRandomizer"
+		],
+		"modmenu": [
+			"io.github.tr100000.text_randomizer.TextRandomizerModMenu"
+		]
+	},
+	"mixins": [
+		"text_randomizer.mixins.json"
+	],
+	"depends": {
+		"fabricloader": "*",
+		"minecraft": "*",
+		"fabric-api": "*",
+		"yet_another_config_lib_v3": "*"
+	}
+}

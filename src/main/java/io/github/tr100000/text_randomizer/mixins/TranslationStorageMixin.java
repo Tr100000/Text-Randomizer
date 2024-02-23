@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import io.github.tr100000.text_randomizer.ModConfig;
+import io.github.tr100000.text_randomizer.TextRandomizer;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -49,9 +50,11 @@ public class TranslationStorageMixin {
 				});
 			}
 			
+			TextRandomizer.saveLanguage(shuffled);
 			return shuffled;
 		}
 		else {
+			TextRandomizer.saveLanguage(translations);
 			return translations;
 		}
     }

@@ -19,10 +19,10 @@ import net.minecraft.client.resource.language.TranslationStorage;
 public class TranslationStorageMixin {
 	@ModifyVariable(method = "<init>", at = @At("HEAD"), ordinal = 0)
     private static Map<String, String> oops(Map<String, String> translations) {
-        if (ModConfig.INSTANCE.modEnabled.value()) {
+        if (ModConfig.modEnabled) {
 			Map<String, String> shuffled = new HashMap<>();
 
-			if (ModConfig.INSTANCE.ignoreFormatSpecifiers.value()) {
+			if (ModConfig.ignoreFormatSpecifiers) {
 				List<String> originalKeys = new ArrayList<>(translations.keySet());
 				List<String> shuffledKeys = new ArrayList<>(originalKeys);
 				Collections.shuffle(shuffledKeys);

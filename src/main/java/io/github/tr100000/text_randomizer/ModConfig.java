@@ -1,87 +1,30 @@
 package io.github.tr100000.text_randomizer;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
+import org.quiltmc.config.api.ReflectiveConfig;
+import org.quiltmc.config.api.annotations.Comment;
+import org.quiltmc.config.api.annotations.SerializedName;
+import org.quiltmc.config.api.serializers.TomlSerializer;
+import org.quiltmc.config.api.values.TrackedValue;
+import org.quiltmc.config.implementor_api.ConfigEnvironment;
+import org.quiltmc.config.implementor_api.ConfigFactory;
 
-import dev.isxander.yacl3.api.ButtonOption;
-import dev.isxander.yacl3.api.ConfigCategory;
-import dev.isxander.yacl3.api.Option;
-import dev.isxander.yacl3.api.OptionFlag;
-import dev.isxander.yacl3.api.YetAnotherConfigLib;
-import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.text.Text;
-import net.minecraft.util.JsonHelper;
 
-public final class ModConfig {
+public final class ModConfig extends ReflectiveConfig {
     public static final Path PATH = FabricLoader.getInstance().getConfigDir().resolve(TextRandomizer.MODID + ".json");
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    public static final ConfigEnvironment ENVIRONMENT = new ConfigEnvironment(FabricLoader.getInstance().getConfigDir(), TomlSerializer.INSTANCE, TomlSerializer.INSTANCE);
+    public static final ModConfig INSTANCE = ConfigFactory.create(ENVIRONMENT, TextRandomizer.MODID, TextRandomizer.MODID, ModConfig.class);
 
-    public static boolean modEnabled = true;
-    public static boolean ignoreFormatSpecifiers = false;
+    @SerializedName("mod_enabled")
+    public final TrackedValue<Boolean> modEnabled = value(true);
 
-    public static Screen generateScreen(Screen parent) {
-        return YetAnotherConfigLib.createBuilder()
-            .title(Text.literal("Text Randomizer Config"))
-            .category(ConfigCategory.createBuilder()
-                .name(Text.literal("Settings"))
-                .option(Option.<Boolean>createBuilder()
-                    .name(Text.literal("Mod Enabled"))
-                    .binding(true, () -> modEnabled, newValue -> modEnabled = newValue)
-                    .flag(OptionFlag.ASSET_RELOAD)
-                    .controller(TickBoxControllerBuilder::create)
-                    .build())
-                .option(Option.<Boolean>createBuilder()
-                    .name(Text.literal("Ignore Format Specifiers"))
-                    .binding(false, () -> ignoreFormatSpecifiers, newValue -> ignoreFormatSpecifiers = newValue)
-                    .flag(OptionFlag.ASSET_RELOAD)
-                    .controller(TickBoxControllerBuilder::create)
-                    .build())
-                .optionIf(FabricLoader.getInstance().isDevelopmentEnvironment(), ButtonOption.createBuilder()
-                    .name(Text.literal("(DEV) Reload"))
-                    .action((screen, button) -> MinecraftClient.getInstance().reloadResourcesConcurrently())
-                    .build())
-                .build())
-            .save(ModConfig::save)
-            .build()
-            .generateScreen(parent);
-    }
+    @SerializedName("ignore_format_specifiers")
+    @Comment("Only change this if you know what you're doing!")
+    public final TrackedValue<Boolean> ignoreFormatSpecifiers = value(false);
 
-    public static void load() {
-        try {
-            if (Files.notExists(PATH)) {
-                save();
-                return;
-            }
-
-            JsonObject json = GSON.fromJson(Files.readString(PATH), JsonObject.class);
-            modEnabled = JsonHelper.getBoolean(json, "modEnabled", modEnabled);
-            ignoreFormatSpecifiers = JsonHelper.getBoolean(json, "ignoreFormatSpecifiers", ignoreFormatSpecifiers);
-        }
-        catch (IOException e) {
-            throw new RuntimeException("Failed to load config file!", e);
-        }
-    }
-
-    public static void save() {
-        try {
-            Files.deleteIfExists(PATH);
-
-            JsonObject json = new JsonObject();
-            json.addProperty("modEnabled", modEnabled);
-            json.addProperty("ignoreFormatSpecifiers", ignoreFormatSpecifiers);
-
-            Files.writeString(PATH, GSON.toJson(json));
-        }
-        catch (IOException e) {
-            throw new RuntimeException("Failed to save config file!", e);
-        }
+    public static boolean canUseYaclConfig() {
+        return FabricLoader.getInstance().isModLoaded("yet_another_config_lib_v3");
     }
 }

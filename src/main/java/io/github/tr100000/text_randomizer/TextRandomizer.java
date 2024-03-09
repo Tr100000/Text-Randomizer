@@ -22,7 +22,6 @@ public class TextRandomizer implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        ModConfig.load();
     }
 
     public static void saveLanguage(Map<String, String> translations) {

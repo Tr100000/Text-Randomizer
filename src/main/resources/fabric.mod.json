@@ -28,7 +28,9 @@
 	"depends": {
 		"fabricloader": "*",
 		"minecraft": "*",
-		"fabric-api": "*",
+		"fabric-api": "*"
+	},
+	"suggests": {
 		"yet_another_config_lib_v3": "*"
 	}
 }

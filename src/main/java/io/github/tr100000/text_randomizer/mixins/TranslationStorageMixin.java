@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import io.github.tr100000.text_randomizer.ModConfig;
 import io.github.tr100000.text_randomizer.TextRandomizer;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,10 +18,10 @@ import net.minecraft.client.resource.language.TranslationStorage;
 public class TranslationStorageMixin {
 	@ModifyVariable(method = "<init>", at = @At("HEAD"), ordinal = 0)
     private static Map<String, String> oops(Map<String, String> translations) {
-        if (ModConfig.modEnabled) {
+        if (TextRandomizer.modEnabled) {
 			Map<String, String> shuffled = new HashMap<>();
 
-			if (ModConfig.ignoreFormatSpecifiers) {
+			if (TextRandomizer.ignoreFormatSpecifiers) {
 				List<String> originalKeys = new ArrayList<>(translations.keySet());
 				List<String> shuffledKeys = new ArrayList<>(originalKeys);
 				Collections.shuffle(shuffledKeys);

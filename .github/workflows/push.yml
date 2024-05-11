@@ -3,30 +3,6 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v3
-      - name: Setup JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-          check-latest: true
-      - name: Setup Cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/loom-cache
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-test-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
-      - name: Build Artifacts
-        run: ./gradlew build
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: artifacts
-          path: build/libs/*.jar
+    uses: Tr100000/modding-utils/.github/workflows/push.yml@main
+    with:
+      java-version: "21"

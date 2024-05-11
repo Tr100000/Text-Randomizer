@@ -22,6 +22,7 @@ public class TextRandomizer implements ClientModInitializer {
     public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     public static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve(TextRandomizer.MODID + ".json");
+    public static final Path EXPORT_PATH = FabricLoader.getInstance().getGameDir().resolve("export/lang.json");
 
     public static boolean modEnabled = true;
     public static boolean ignoreFormatSpecifiers = false;
@@ -70,17 +71,18 @@ public class TextRandomizer implements ClientModInitializer {
         return FabricLoader.getInstance().isModLoaded("yet_another_config_lib_v3");
     }
 
-    public static void saveLanguage(Map<String, String> translations) {
+    public static void trySaveLanguage(Map<String, String> translations) {
         if (!exportLanguage) {
             return;
         }
         try {
             JsonObject json = new JsonObject();
             translations.forEach(json::addProperty);
-            Path path = FabricLoader.getInstance().getGameDir().resolve("export/lang.json");
-            Files.deleteIfExists(path);
-            Files.writeString(path, GSON.toJson(json));
+            Files.deleteIfExists(EXPORT_PATH);
+            Files.writeString(EXPORT_PATH, GSON.toJson(json));
         }
-        catch (IOException e) {}
+        catch (IOException e) {
+            LOGGER.warn("Failed to export language file!", e);
+        }
     }
 }

@@ -7,27 +7,8 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v3
-      - name: Setup JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-          check-latest: true
-      - name: Build Artifacts
-        run: ./gradlew build
-      - name: Upload Atrifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: artifacts
-          path: build/libs/*.jar
-      - name: Upload to GitHub
-        uses: AButler/upload-release-assets@v3.0
-        with:
-          files: 'build/libs/*[0-9].jar'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+    uses: Tr100000/modding-utils/.github/workflows/release.yml@main
+    with:
+      java-version: "21"
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}

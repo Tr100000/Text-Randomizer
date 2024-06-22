@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.6-SNAPSHOT'
+	id 'fabric-loom' version "${loom_version}"
 	id 'maven-publish'
 }
 
@@ -8,17 +8,11 @@ version = "$project.version+${minecraft_version}"
 
 repositories {
 	maven {
-		name = "Quilt"
-		url = "https://maven.quiltmc.org/repository/release/"
-		content {
-			includeGroupByRegex "org\\.quiltmc.*"
-		}
-	}
-	maven {
 		name = "Xander Maven"
 		url = "https://maven.isxander.dev/releases"
 		content {
 			includeGroup "dev.isxander"
+			includeGroup "org.quiltmc.parsers"
 		}
 	}
 	maven {
@@ -34,18 +28,9 @@ dependencies {
 	minecraft "com.mojang:minecraft:${minecraft_version}"
 	mappings "net.fabricmc:yarn:${minecraft_version}+build.${yarn_version}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${loader_version}"
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}+${minecraft_version}"
 
 	modImplementation "com.terraformersmc:modmenu:${modmenu_version}"
 	modImplementation "dev.isxander:yet-another-config-lib:${yacl_version}-fabric"
-}
-
-loom {
-	mods {
-		"text_randomizer" {
-			sourceSet("main")
-		}
-	}
 }
 
 processResources {

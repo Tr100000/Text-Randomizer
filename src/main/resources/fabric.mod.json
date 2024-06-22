@@ -6,9 +6,9 @@
   "description": "Randomizes all translated text in Minecraft.",
   "authors": ["Tr100000"],
   "contact": {
-    "homepage": "https://github.com/Tr100000/text-randomizer",
-    "sources": "https://github.com/Tr100000/text-randomizer",
-    "issues": "https://github.com/Tr100000/text-randomizer/issues"
+    "homepage": "https://github.com/Tr100000/Text-Randomizer",
+    "sources": "https://github.com/Tr100000/Text-Randomizer",
+    "issues": "https://github.com/Tr100000/Text-Randomizer/issues"
   },
   "license": "MIT",
   "environment": "client",
@@ -18,11 +18,11 @@
   },
   "mixins": ["text_randomizer.mixins.json"],
   "depends": {
-    "fabricloader": "*",
-    "minecraft": "*",
-    "fabric-api": "*"
+    "fabricloader": ">=0.15",
+    "minecraft": "*"
   },
   "suggests": {
+    "modmenu": "*",
     "yet_another_config_lib_v3": "*"
   }
 }

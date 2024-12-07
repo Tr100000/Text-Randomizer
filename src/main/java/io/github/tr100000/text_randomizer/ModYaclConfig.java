@@ -6,6 +6,7 @@ import dev.isxander.yacl3.api.OptionDescription;
 import dev.isxander.yacl3.api.OptionFlag;
 import dev.isxander.yacl3.api.OptionGroup;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
+import dev.isxander.yacl3.api.controller.LongFieldControllerBuilder;
 import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
@@ -46,12 +47,31 @@ public final class ModYaclConfig {
                     .build()
                 )
                 .group(OptionGroup.createBuilder()
-                    .name(Text.literal("Item Models"))
+                    .name(Text.literal("Item Model Randomization"))
                     .option(Option.<Boolean>createBuilder()
                         .name(Text.literal("Randomize Item Models"))
                         .binding(false, () -> TextRandomizer.randomizeItemModels, newValue -> TextRandomizer.randomizeItemModels = newValue)
                         .flag(OptionFlag.ASSET_RELOAD)
                         .controller(TickBoxControllerBuilder::create)
+                        .build()
+                    )
+                    .build()
+                )
+                .group(OptionGroup.createBuilder()
+                    .name(Text.literal("Seed"))
+                    .collapsed(true)
+                    .option(Option.<Boolean>createBuilder()
+                        .name(Text.literal("Use Seed"))
+                        .binding(false, () -> TextRandomizer.useSeed, newValue -> TextRandomizer.useSeed = newValue)
+                        .flag(OptionFlag.ASSET_RELOAD)
+                        .controller(TickBoxControllerBuilder::create)
+                        .build()
+                    )
+                    .option(Option.<Long>createBuilder()
+                        .name(Text.literal("Seed"))
+                        .binding(0L, () -> TextRandomizer.seed, newValue -> TextRandomizer.seed = newValue)
+                        .flag(OptionFlag.ASSET_RELOAD)
+                        .controller(LongFieldControllerBuilder::create)
                         .build()
                     )
                     .build()

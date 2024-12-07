@@ -1,7 +1,6 @@
 package io.github.tr100000.text_randomizer.mixins;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,8 +35,7 @@ public class TranslationStorageMixin {
 
                 seperatedMap.forEach((count, map) -> {
                     List<String> originalKeys = new ArrayList<>(map.keySet());
-                    List<String> shuffledKeys = new ArrayList<>(originalKeys);
-                    Collections.shuffle(shuffledKeys);
+                    List<String> shuffledKeys = Shuffle.shuffleList(new ArrayList<>(originalKeys));
 
                     for (int i = 0; i < originalKeys.size(); i++) {
                         shuffled.put(originalKeys.get(i), map.get(shuffledKeys.get(i)));

@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public final class Shuffle {
     private Shuffle() {}
@@ -13,8 +14,7 @@ public final class Shuffle {
         Map<T, E> shuffled = new HashMap<>();
 
         List<T> originalKeys = new ArrayList<>(original.keySet());
-        List<T> shuffledKeys = new ArrayList<>(originalKeys);
-        Collections.shuffle(shuffledKeys);
+        List<T> shuffledKeys = shuffleList(new ArrayList<>(originalKeys));
 
         for (int i = 0; i < originalKeys.size(); i++) {
             shuffled.put(originalKeys.get(i), original.get(shuffledKeys.get(i)));
@@ -25,5 +25,14 @@ public final class Shuffle {
 
     public static <T, E> Map<T, E> shuffleMapIf(boolean shouldShuffle, Map<T, E> original) {
         return shouldShuffle ? shuffleMap(original) : original;
+    }
+
+    public static <T> List<T> shuffleList(List<T> list) {
+        Collections.shuffle(list, getRandom());
+        return list;
+    }
+
+    public static Random getRandom() {
+        return TextRandomizer.useSeed ? new Random(TextRandomizer.seed) : new Random();
     }
 }

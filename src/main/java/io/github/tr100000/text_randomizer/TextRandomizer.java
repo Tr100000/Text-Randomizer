@@ -28,6 +28,8 @@ public class TextRandomizer implements ClientModInitializer {
     public static boolean ignoreFormatSpecifiers = false;
     public static boolean exportLanguage = false;
     public static boolean randomizeItemModels = false;
+    public static boolean useSeed = false;
+    public static long seed = 0;
 
     @Override
     public void onInitializeClient() {
@@ -46,6 +48,9 @@ public class TextRandomizer implements ClientModInitializer {
             randomizeText = JsonHelper.getBoolean(json, "modEnabled", randomizeText);
             ignoreFormatSpecifiers = JsonHelper.getBoolean(json, "ignoreFormatSpecifiers", ignoreFormatSpecifiers);
             exportLanguage = JsonHelper.getBoolean(json, "exportLanguage", exportLanguage);
+            randomizeItemModels = JsonHelper.getBoolean(json, "randomizeItemModels", randomizeItemModels);
+            useSeed = JsonHelper.getBoolean(json, "useSeed", useSeed);
+            seed = JsonHelper.getLong(json, "seed", seed);
         }
         catch (IOException e) {
             throw new RuntimeException("Failed to load config file!", e);
@@ -57,9 +62,12 @@ public class TextRandomizer implements ClientModInitializer {
             Files.deleteIfExists(CONFIG_PATH);
 
             JsonObject json = new JsonObject();
-            json.addProperty("modEnabled", randomizeText);
+            json.addProperty("randomizeText", randomizeText);
             json.addProperty("ignoreFormatSpecifiers", ignoreFormatSpecifiers);
             json.addProperty("exportLanguage", exportLanguage);
+            json.addProperty("randomizeItemModels", randomizeItemModels);
+            json.addProperty("useSeed", useSeed);
+            json.addProperty("seed", seed);
 
             Files.writeString(CONFIG_PATH, GSON.toJson(json));
         }

@@ -24,9 +24,10 @@ public class TextRandomizer implements ClientModInitializer {
     public static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve(TextRandomizer.MODID + ".json");
     public static final Path EXPORT_PATH = FabricLoader.getInstance().getGameDir().resolve("export/lang.json");
 
-    public static boolean modEnabled = true;
+    public static boolean randomizeText = true;
     public static boolean ignoreFormatSpecifiers = false;
     public static boolean exportLanguage = false;
+    public static boolean randomizeItemModels = false;
 
     @Override
     public void onInitializeClient() {
@@ -42,7 +43,7 @@ public class TextRandomizer implements ClientModInitializer {
             }
 
             JsonObject json = GSON.fromJson(Files.readString(CONFIG_PATH), JsonObject.class);
-            modEnabled = JsonHelper.getBoolean(json, "modEnabled", modEnabled);
+            randomizeText = JsonHelper.getBoolean(json, "modEnabled", randomizeText);
             ignoreFormatSpecifiers = JsonHelper.getBoolean(json, "ignoreFormatSpecifiers", ignoreFormatSpecifiers);
             exportLanguage = JsonHelper.getBoolean(json, "exportLanguage", exportLanguage);
         }
@@ -56,7 +57,7 @@ public class TextRandomizer implements ClientModInitializer {
             Files.deleteIfExists(CONFIG_PATH);
 
             JsonObject json = new JsonObject();
-            json.addProperty("modEnabled", modEnabled);
+            json.addProperty("modEnabled", randomizeText);
             json.addProperty("ignoreFormatSpecifiers", ignoreFormatSpecifiers);
             json.addProperty("exportLanguage", exportLanguage);
 

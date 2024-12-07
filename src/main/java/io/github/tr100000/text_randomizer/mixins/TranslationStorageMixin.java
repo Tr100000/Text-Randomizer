@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.github.tr100000.text_randomizer.Shuffle;
 import io.github.tr100000.text_randomizer.TextRandomizer;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,22 +18,17 @@ import net.minecraft.client.resource.language.TranslationStorage;
 @Mixin(TranslationStorage.class)
 public class TranslationStorageMixin {
     @ModifyVariable(method = "<init>", at = @At("HEAD"), ordinal = 0)
-    private static Map<String, String> shuffle(Map<String, String> translations) {
-        if (TextRandomizer.modEnabled) {
-            Map<String, String> shuffled = new HashMap<>();
+    private static Map<String, String> shuffle(Map<String, String> original) {
+        if (TextRandomizer.randomizeText) {
+            Map<String, String> shuffled;
 
             if (TextRandomizer.ignoreFormatSpecifiers) {
-                List<String> originalKeys = new ArrayList<>(translations.keySet());
-                List<String> shuffledKeys = new ArrayList<>(originalKeys);
-                Collections.shuffle(shuffledKeys);
-
-                for (int i = 0; i < originalKeys.size(); i++) {
-                    shuffled.put(originalKeys.get(i), translations.get(shuffledKeys.get(i)));
-                }
+                shuffled = Shuffle.shuffleMap(original);
             }
             else {
+                shuffled = new HashMap<>();
                 Map<Integer, Map<String, String>> seperatedMap = new HashMap<>();
-                translations.entrySet().forEach(entry -> {
+                original.entrySet().forEach(entry -> {
                     int count = entry.getValue().split("%(\\d\\$)?s", -1).length;
                     seperatedMap.computeIfAbsent(count, HashMap::new);
                     seperatedMap.get(count).put(entry.getKey(), entry.getValue());
@@ -53,8 +49,8 @@ public class TranslationStorageMixin {
             return shuffled;
         }
         else {
-            TextRandomizer.trySaveLanguage(translations);
-            return translations;
+            TextRandomizer.trySaveLanguage(original);
+            return original;
         }
     }
 }

@@ -5,11 +5,9 @@
 
 Randomizes all translated text in Minecraft.
 
-## Current Features
+## Features
 - Randomizes translated text
 - Supports all languages and properly created mods
 - Optionally randomize item models for even more chaos
-- In-game config with [YetAnotherConfigLib](https://modrinth.com/mod/yacl) installed
-
-## Planned Features
+- In-game config with [Mod Menu](https://modrinth.com/mod/modmenu) and [YetAnotherConfigLib](https://modrinth.com/mod/yacl) installed
 - Export to resource pack

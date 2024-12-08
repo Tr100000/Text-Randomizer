@@ -23,10 +23,6 @@ public final class Shuffle {
         return shuffled;
     }
 
-    public static <T, E> Map<T, E> shuffleMapIf(boolean shouldShuffle, Map<T, E> original) {
-        return shouldShuffle ? shuffleMap(original) : original;
-    }
-
     public static <T> List<T> shuffleList(List<T> list) {
         Collections.shuffle(list, getRandom());
         return list;

@@ -19,7 +19,7 @@
   "mixins": ["text_randomizer.mixins.json"],
   "depends": {
     "java": ">=21",
-    "fabricloader": ">=0.16",
+    "fabricloader": "*",
     "minecraft": "*"
   },
   "suggests": {

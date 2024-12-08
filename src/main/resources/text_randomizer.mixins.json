@@ -2,7 +2,12 @@
   "required": true,
   "package": "io.github.tr100000.text_randomizer.mixins",
   "compatibilityLevel": "JAVA_21",
-  "client": ["ModelBakerMixin", "TranslationStorageMixin"],
+  "client": [
+    "ItemStackMixin",
+    "MinecraftClientMixin",
+    "ModelBakerMixin",
+    "TranslationStorageMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

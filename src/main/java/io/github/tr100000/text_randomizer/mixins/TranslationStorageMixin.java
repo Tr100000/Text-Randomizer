@@ -18,7 +18,7 @@ import net.minecraft.client.resource.language.TranslationStorage;
 public class TranslationStorageMixin {
     @ModifyVariable(method = "<init>", at = @At("HEAD"), ordinal = 0)
     private static Map<String, String> shuffle(Map<String, String> original) {
-        if (TextRandomizer.randomizeText) {
+        if (TextRandomizer.modEnabled && TextRandomizer.randomizeText) {
             Map<String, String> shuffled;
 
             if (TextRandomizer.ignoreFormatSpecifiers) {
@@ -47,7 +47,6 @@ public class TranslationStorageMixin {
             return shuffled;
         }
         else {
-            TextRandomizer.trySaveLanguage(original);
             return original;
         }
     }

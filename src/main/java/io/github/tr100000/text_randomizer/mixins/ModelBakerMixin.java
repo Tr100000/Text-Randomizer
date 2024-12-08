@@ -9,6 +9,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
+import com.google.gson.JsonElement;
+import com.mojang.serialization.JsonOps;
+
 import net.minecraft.client.item.ItemAsset;
 import net.minecraft.client.render.model.ModelBaker;
 import net.minecraft.util.Identifier;
@@ -17,6 +20,20 @@ import net.minecraft.util.Identifier;
 public class ModelBakerMixin {
     @ModifyVariable(method = "<init>", at = @At("HEAD"), ordinal = 1)
     private static Map<Identifier, ItemAsset> shuffleItems(Map<Identifier, ItemAsset> map) {
-        return Shuffle.shuffleMapIf(TextRandomizer.randomizeItemModels, map);
+        if (TextRandomizer.modEnabled && TextRandomizer.randomizeItemModels) {
+            Map<Identifier, ItemAsset> newMap = Shuffle.shuffleMap(map);
+
+            if (TextRandomizer.exportToResourcePack) {
+                newMap.forEach((id, asset) -> {
+                    JsonElement json = ItemAsset.CODEC.encodeStart(JsonOps.INSTANCE, asset).getOrThrow();
+                    TextRandomizer.exportJson(json, TextRandomizer.getAssetExportPath(id, "items"));
+                });
+            }
+
+            return newMap;
+        }
+        else {
+            return map;
+        }
     }
 }

@@ -34,6 +34,8 @@ dependencies {
     modImplementation "dev.isxander:yet-another-config-lib:${yacl_version}-fabric"
 }
 
+apply from: "https://raw.githubusercontent.com/Tr100000/modding-utils/main/scripts/devlogin.gradle"
+
 spotless {
     format "misc", {
         target "*.gradle", "*.properties", ".gitattributes", ".gitignore"
@@ -60,6 +62,11 @@ processResources {
 tasks.withType(JavaCompile).configureEach {
     it.options.encoding = 'UTF-8'
     it.options.release = 21
+}
+
+tasks.withType(AbstractArchiveTask).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
 }
 
 java {

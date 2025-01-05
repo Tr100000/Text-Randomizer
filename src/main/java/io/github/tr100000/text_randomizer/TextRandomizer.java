@@ -129,8 +129,8 @@ public class TextRandomizer implements ClientModInitializer {
         }
     }
 
-    public static boolean deleteFolder(Path folder) throws IOException {
-        if (!Files.exists(folder)) return false;
+    public static void deleteFolder(Path folder) throws IOException {
+        if (!Files.exists(folder)) return;
         List<Path> paths = Files.list(folder).toList();
         if (paths != null) {
             for (Path path : paths) {
@@ -143,6 +143,5 @@ public class TextRandomizer implements ClientModInitializer {
             }
         }
         Files.delete(folder);
-        return true;
     }
 }

@@ -1,11 +1,15 @@
 plugins {
-    id 'fabric-loom' version "${loom_version}"
-    id 'com.diffplug.spotless' version "+"
-    id 'maven-publish'
+    id "net.fabricmc.fabric-loom-remap" version "${loom_version}"
+    id "com.diffplug.spotless" version "8.+"
+    id "maven-publish"
 }
 
-base.archivesName = project.archives_base_name
-version = "$project.version+${minecraft_version}"
+version = "$project.mod_version+${project.minecraft_version}"
+group = project.maven_group
+
+base {
+	archivesName = project.archives_base_name
+}
 
 repositories {
     maven {
@@ -26,12 +30,12 @@ repositories {
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:${minecraft_version}"
-    mappings "net.fabricmc:yarn:${minecraft_version}+build.${yarn_version}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${loader_version}"
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.minecraft_version}+build.${project.yarn_mappings}:v2"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    modImplementation "com.terraformersmc:modmenu:${modmenu_version}"
-    modImplementation "dev.isxander:yet-another-config-lib:${yacl_version}-fabric"
+    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+    modImplementation "dev.isxander:yet-another-config-lib:${project.yacl_version}-fabric"
 }
 
 apply from: "https://raw.githubusercontent.com/Tr100000/modding-utils/main/scripts/devlogin.gradle"
@@ -52,42 +56,43 @@ spotless {
 }
 
 processResources {
-    inputs.property 'version', version
+	inputs.property "version", project.version
 
-    filesMatching('fabric.mod.json') {
-        expand 'version': version
-    }
+	filesMatching("fabric.mod.json") {
+		expand "version": inputs.properties.version
+	}
 }
 
 tasks.withType(JavaCompile).configureEach {
-    it.options.encoding = 'UTF-8'
-    it.options.release = 21
+	it.options.encoding = "UTF-8"
+	it.options.release = 21
 }
 
 tasks.withType(AbstractArchiveTask).configureEach {
-    preserveFileTimestamps = false
-    reproducibleFileOrder = true
+	preserveFileTimestamps = false
+	reproducibleFileOrder = true
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
+
+	withSourcesJar()
 }
 
 jar {
-    from('LICENSE') {
-        rename { "${it}_${base.archivesName.get()}" }
-    }
+	inputs.property "archivesName", project.base.archivesName
+
+	from("LICENSE") {
+		rename { "${it}_${inputs.properties.archivesName}" }
+	}
 }
 
 publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-        }
-    }
-
-    repositories {
-        // Add repositories to publish to here.
-    }
+	publications {
+		create("mavenJava", MavenPublication) {
+			artifactId = project.archives_base_name
+			from components.java
+		}
+	}
 }

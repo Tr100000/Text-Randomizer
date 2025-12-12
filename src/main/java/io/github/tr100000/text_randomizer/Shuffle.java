@@ -29,6 +29,6 @@ public final class Shuffle {
     }
 
     public static Random getRandom() {
-        return TextRandomizer.useSeed ? new Random(TextRandomizer.seed) : new Random();
+        return ModConfig.INSTANCE.useSeed ? new Random(ModConfig.INSTANCE.seed) : new Random();
     }
 }

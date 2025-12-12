@@ -6,6 +6,6 @@ import com.terraformersmc.modmenu.api.ModMenuApi;
 public class TextRandomizerModMenu implements ModMenuApi {
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return TextRandomizer.canUseYaclConfig() ? ModYaclConfig::generateScreen : screen -> null;
+        return ModConfig.canUseYaclConfig() ? ModYaclConfig::generateScreen : screen -> null;
     }
 }

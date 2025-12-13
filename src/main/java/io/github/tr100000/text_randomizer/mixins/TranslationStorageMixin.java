@@ -20,21 +20,21 @@ public class TranslationStorageMixin {
         if (ModConfig.should(c -> c.randomizeText)) {
             Map<String, String> shuffled = new HashMap<>();
 
-			Map<String, String> pool;
-			if (ModConfig.INSTANCE.ignoreEmptyStrings) {
-				pool = new HashMap<>();
-				for (Map.Entry<String, String> entry : original.entrySet()) {
-					if (entry.getValue().isEmpty()) {
-						shuffled.put(entry.getKey(), entry.getValue());
-					}
-					else {
-						pool.put(entry.getKey(), entry.getValue());
-					}
-				}
-			}
-			else {
-				pool = original;
-			}
+            Map<String, String> pool;
+            if (ModConfig.INSTANCE.ignoreEmptyStrings) {
+                pool = new HashMap<>();
+                for (Map.Entry<String, String> entry : original.entrySet()) {
+                    if (entry.getValue().isEmpty()) {
+                        shuffled.put(entry.getKey(), entry.getValue());
+                    }
+                    else {
+                        pool.put(entry.getKey(), entry.getValue());
+                    }
+                }
+            }
+            else {
+                pool = original;
+            }
 
             if (ModConfig.INSTANCE.ignoreFormatSpecifiers) {
                 shuffled.putAll(Shuffle.shuffleMap(pool));
@@ -42,10 +42,10 @@ public class TranslationStorageMixin {
             else {
                 Map<Integer, Map<String, String>> seperatedMap = new HashMap<>();
                 pool.forEach((key, value) -> {
-					int count = value.split("%(\\d\\$)?s", -1).length;
-					seperatedMap.computeIfAbsent(count, HashMap::new);
-					seperatedMap.get(count).put(key, value);
-				});
+                    int count = value.split("%(\\d\\$)?s", -1).length;
+                    seperatedMap.computeIfAbsent(count, HashMap::new);
+                    seperatedMap.get(count).put(key, value);
+                });
 
                 seperatedMap.forEach((count, map) -> {
                     List<String> originalKeys = new ArrayList<>(map.keySet());
@@ -61,9 +61,9 @@ public class TranslationStorageMixin {
             return shuffled;
         }
         else {
-			if (ModConfig.should(c -> c.exportAll)) {
-				ExportUtils.trySaveLanguage(original);
-			}
+            if (ModConfig.should(c -> c.exportAll)) {
+                ExportUtils.trySaveLanguage(original);
+            }
 
             return original;
         }

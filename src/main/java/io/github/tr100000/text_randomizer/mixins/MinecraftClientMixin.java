@@ -29,16 +29,16 @@ public class MinecraftClientMixin {
 
             JsonObject packJson = new JsonObject();
             PackVersion packVersion = SharedConstants.getGameVersion().packVersion(ResourceType.CLIENT_RESOURCES);
-			JsonArray packVersionArray = new JsonArray();
-			packVersionArray.add(packVersion.major());
-			packVersionArray.add(packVersion.minor());
+            JsonArray packVersionArray = new JsonArray();
+            packVersionArray.add(packVersion.major());
+            packVersionArray.add(packVersion.minor());
             packJson.add("min_format", packVersionArray);
-			packJson.add("max_format", packVersionArray);
+            packJson.add("max_format", packVersionArray);
             packJson.addProperty("description", ModConfig.INSTANCE.useSeed ? "Generated with seed " + ModConfig.INSTANCE.seed : "Generated");
             json.add("pack", packJson);
 
-			JsonObject filterJson = new JsonObject();
-			JsonArray filterBlocks = new JsonArray();
+            JsonObject filterJson = new JsonObject();
+            JsonArray filterBlocks = new JsonArray();
 
             if (ModConfig.INSTANCE.randomizeText || ModConfig.INSTANCE.exportAll) {
                 JsonObject langFilterJson = new JsonObject();
@@ -47,16 +47,16 @@ public class MinecraftClientMixin {
                 filterBlocks.add(langFilterJson);
             }
 
-			if (ModConfig.INSTANCE.randomizeItemModels || ModConfig.INSTANCE.exportAll) {
-				JsonObject itemModelFilterJson = new JsonObject();
-				itemModelFilterJson.addProperty("path", "items\\/.*");
-				filterBlocks.add(itemModelFilterJson);
-			}
+            if (ModConfig.INSTANCE.randomizeItemModels || ModConfig.INSTANCE.exportAll) {
+                JsonObject itemModelFilterJson = new JsonObject();
+                itemModelFilterJson.addProperty("path", "items\\/.*");
+                filterBlocks.add(itemModelFilterJson);
+            }
 
-			filterJson.add("block", filterBlocks);
-			json.add("filter", filterJson);
+            filterJson.add("block", filterBlocks);
+            json.add("filter", filterJson);
 
-			ExportUtils.exportJson(json, ExportUtils.mcmetaPath());
+            ExportUtils.exportJson(json, ExportUtils.mcmetaPath());
         }
     }
 }

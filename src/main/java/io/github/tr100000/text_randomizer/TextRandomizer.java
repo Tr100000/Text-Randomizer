@@ -18,6 +18,6 @@ public class TextRandomizer implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-		ModConfig.load();
+        ModConfig.load();
     }
 }

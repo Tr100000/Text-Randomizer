@@ -29,19 +29,19 @@ public class ModelBakerMixin {
             return newMap;
         }
         else {
-			if (ModConfig.should(c -> c.exportAll)) {
-				export(map);
-			}
+            if (ModConfig.should(c -> c.exportAll)) {
+                export(map);
+            }
 
             return map;
         }
     }
 
-	@Unique
-	private static void export(Map<Identifier, ItemAsset> map) {
-		map.forEach((id, asset) -> {
-			JsonElement json = ItemAsset.CODEC.encodeStart(JsonOps.INSTANCE, asset).getOrThrow();
-			ExportUtils.exportJson(json, ExportUtils.getAssetExportPath(id, "items"));
-		});
-	}
+    @Unique
+    private static void export(Map<Identifier, ItemAsset> map) {
+        map.forEach((id, asset) -> {
+            JsonElement json = ItemAsset.CODEC.encodeStart(JsonOps.INSTANCE, asset).getOrThrow();
+            ExportUtils.exportJson(json, ExportUtils.getAssetExportPath(id, "items"));
+        });
+    }
 }

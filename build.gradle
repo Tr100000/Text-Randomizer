@@ -42,7 +42,6 @@ dependencies {
 apply from: "https://raw.githubusercontent.com/Tr100000/modding-utils/main/scripts/devlogin.gradle"
 
 modrinth {
-    token = "mrp_wVhKbfoCWwP7jENDhRJBUuisGMl4caX6517zBdlHS3drQTb0JHVU9PQJqQJH"
     projectId = "text-randomizer"
     uploadFile = remapJar
     syncBodyFrom = rootProject.file("README.md").text

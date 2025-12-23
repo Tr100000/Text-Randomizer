@@ -6,9 +6,9 @@ import io.github.tr100000.text_randomizer.ExportUtils;
 import io.github.tr100000.text_randomizer.ModConfig;
 import io.github.tr100000.text_randomizer.TextRandomizer;
 import net.minecraft.SharedConstants;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.resource.PackVersion;
-import net.minecraft.resource.ResourceType;
+import net.minecraft.client.Minecraft;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.metadata.pack.PackFormat;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,9 +17,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 
-@Mixin(MinecraftClient.class)
-public class MinecraftClientMixin {
-    @Inject(method = "reloadResources()Ljava/util/concurrent/CompletableFuture;", at = @At("HEAD"))
+@Mixin(Minecraft.class)
+public abstract class MinecraftMixin {
+    @Inject(method = "reloadResourcePacks()Ljava/util/concurrent/CompletableFuture;", at = @At("HEAD"))
     private void beforeReloadResources(CallbackInfoReturnable<CompletableFuture<Void>> callbackInfo) throws IOException {
         if (ModConfig.should(c -> c.exportToResourcePack)) {
             ExportUtils.deleteFolder(ExportUtils.getExportRoot());
@@ -28,7 +28,7 @@ public class MinecraftClientMixin {
             JsonObject json = new JsonObject();
 
             JsonObject packJson = new JsonObject();
-            PackVersion packVersion = SharedConstants.getGameVersion().packVersion(ResourceType.CLIENT_RESOURCES);
+            PackFormat packVersion = SharedConstants.getCurrentVersion().packVersion(PackType.CLIENT_RESOURCES);
             JsonArray packVersionArray = new JsonArray();
             packVersionArray.add(packVersion.major());
             packVersionArray.add(packVersion.minor());
@@ -42,8 +42,8 @@ public class MinecraftClientMixin {
 
             if (ModConfig.INSTANCE.randomizeText || ModConfig.INSTANCE.exportAll) {
                 JsonObject langFilterJson = new JsonObject();
-                MinecraftClient client = MinecraftClient.getInstance();
-                langFilterJson.addProperty("path", String.format("lang\\/%s\\.json", client.options.language));
+                Minecraft client = Minecraft.getInstance();
+                langFilterJson.addProperty("path", String.format("lang\\/%s\\.json", client.options.languageCode));
                 filterBlocks.add(langFilterJson);
             }
 

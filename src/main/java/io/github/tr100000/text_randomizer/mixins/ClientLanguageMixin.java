@@ -3,7 +3,7 @@ package io.github.tr100000.text_randomizer.mixins;
 import io.github.tr100000.text_randomizer.ExportUtils;
 import io.github.tr100000.text_randomizer.ModConfig;
 import io.github.tr100000.text_randomizer.Shuffle;
-import net.minecraft.client.resource.language.TranslationStorage;
+import net.minecraft.client.resources.language.ClientLanguage;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -13,8 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Mixin(TranslationStorage.class)
-public class TranslationStorageMixin {
+@Mixin(ClientLanguage.class)
+public abstract class ClientLanguageMixin {
     @ModifyVariable(method = "<init>", at = @At("HEAD"), ordinal = 0, argsOnly = true)
     private static Map<String, String> shuffle(Map<String, String> original) {
         if (ModConfig.should(c -> c.randomizeText)) {

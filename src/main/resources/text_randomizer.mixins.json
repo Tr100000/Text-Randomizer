@@ -3,10 +3,10 @@
   "package": "io.github.tr100000.text_randomizer.mixins",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "ClientLanguageMixin",
     "ItemStackMixin",
-    "MinecraftClientMixin",
-    "ModelBakerMixin",
-    "TranslationStorageMixin"
+    "MinecraftMixin",
+    "ModelBakeryMixin"
   ],
   "injectors": {
     "defaultRequire": 1

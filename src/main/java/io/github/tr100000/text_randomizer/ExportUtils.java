@@ -3,8 +3,8 @@ package io.github.tr100000.text_randomizer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.Minecraft;
+import net.minecraft.resources.Identifier;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -21,8 +21,8 @@ public final class ExportUtils {
         }
         JsonObject json = new JsonObject();
         translations.forEach(json::addProperty);
-        MinecraftClient client = MinecraftClient.getInstance();
-        exportJson(json, getAssetExportPath(Identifier.ofVanilla(client.options.language), "lang"));
+        Minecraft client = Minecraft.getInstance();
+        exportJson(json, getAssetExportPath(Identifier.withDefaultNamespace(client.options.languageCode), "lang"));
     }
 
     public static Path getExportRoot() {

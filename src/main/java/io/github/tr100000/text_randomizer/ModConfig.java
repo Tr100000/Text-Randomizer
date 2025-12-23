@@ -2,7 +2,7 @@ package io.github.tr100000.text_randomizer;
 
 import com.google.gson.JsonObject;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.util.JsonHelper;
+import net.minecraft.util.GsonHelper;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -38,17 +38,17 @@ public final class ModConfig {
 
             JsonObject json = TextRandomizer.GSON.fromJson(Files.readString(TextRandomizer.CONFIG_PATH), JsonObject.class);
 
-            INSTANCE.modEnabled = JsonHelper.getBoolean(json, "modEnabled", INSTANCE.modEnabled);
-            INSTANCE.randomizeText = JsonHelper.getBoolean(json, "randomizeText", INSTANCE.randomizeText);
-            INSTANCE.ignoreEmptyStrings = JsonHelper.getBoolean(json, "ignoreEmptyStrings", INSTANCE.ignoreEmptyStrings);
-            INSTANCE.ignoreFormatSpecifiers = JsonHelper.getBoolean(json, "ignoreFormatSpecifiers", INSTANCE.ignoreFormatSpecifiers);
-            INSTANCE.randomizeItemModels = JsonHelper.getBoolean(json, "randomizeItemModels", INSTANCE.randomizeItemModels);
-            INSTANCE.hideItemIds = JsonHelper.getBoolean(json, "hideItemIds", INSTANCE.hideItemIds);
-            INSTANCE.useSeed = JsonHelper.getBoolean(json, "useSeed", INSTANCE.useSeed);
-            INSTANCE.seed = JsonHelper.getLong(json, "seed", INSTANCE.seed);
-            INSTANCE.exportToResourcePack = JsonHelper.getBoolean(json, "exportToResourcePack", INSTANCE.exportToResourcePack);
-            INSTANCE.exportAll = JsonHelper.getBoolean(json, "exportAll", INSTANCE.exportAll);
-            INSTANCE.generatedPackName = JsonHelper.getString(json, "generatedPackName", INSTANCE.generatedPackName);
+            INSTANCE.modEnabled = GsonHelper.getAsBoolean(json, "modEnabled", INSTANCE.modEnabled);
+            INSTANCE.randomizeText = GsonHelper.getAsBoolean(json, "randomizeText", INSTANCE.randomizeText);
+            INSTANCE.ignoreEmptyStrings = GsonHelper.getAsBoolean(json, "ignoreEmptyStrings", INSTANCE.ignoreEmptyStrings);
+            INSTANCE.ignoreFormatSpecifiers = GsonHelper.getAsBoolean(json, "ignoreFormatSpecifiers", INSTANCE.ignoreFormatSpecifiers);
+            INSTANCE.randomizeItemModels = GsonHelper.getAsBoolean(json, "randomizeItemModels", INSTANCE.randomizeItemModels);
+            INSTANCE.hideItemIds = GsonHelper.getAsBoolean(json, "hideItemIds", INSTANCE.hideItemIds);
+            INSTANCE.useSeed = GsonHelper.getAsBoolean(json, "useSeed", INSTANCE.useSeed);
+            INSTANCE.seed = GsonHelper.getAsLong(json, "seed", INSTANCE.seed);
+            INSTANCE.exportToResourcePack = GsonHelper.getAsBoolean(json, "exportToResourcePack", INSTANCE.exportToResourcePack);
+            INSTANCE.exportAll = GsonHelper.getAsBoolean(json, "exportAll", INSTANCE.exportAll);
+            INSTANCE.generatedPackName = GsonHelper.getAsString(json, "generatedPackName", INSTANCE.generatedPackName);
         }
         catch (IOException e) {
             throw new RuntimeException("Failed to load config file!", e);

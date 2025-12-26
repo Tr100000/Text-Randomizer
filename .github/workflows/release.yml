@@ -6,9 +6,11 @@ on:
 
 jobs:
   build:
+    runs-on: ubuntu-24.04
+    env:
+      MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
     permissions:
       contents: write
-    runs-on: ubuntu-24.04
     steps:
       - name: checkout repository
         uses: actions/checkout@v6

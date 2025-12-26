@@ -27,6 +27,6 @@ jobs:
         run: ./gradlew build modrinthSyncBody
       - uses: Kir-Antipov/mc-publish@v3.3
         with:
-          modrinth-id: text-randomizer
+          modrinth-id: rHerwnq0
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}

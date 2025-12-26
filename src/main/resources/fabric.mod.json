@@ -24,6 +24,6 @@
   },
   "suggests": {
     "modmenu": "*",
-    "yet_another_config_lib_v3": ">=3.6"
+    "yet_another_config_lib_v3": ">=3.8"
   }
 }

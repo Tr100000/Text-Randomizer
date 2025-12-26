@@ -6,6 +6,8 @@ on:
 
 jobs:
   build:
+    permissions:
+      contents: write
     runs-on: ubuntu-24.04
     steps:
       - name: checkout repository
@@ -21,5 +23,8 @@ jobs:
         run: chmod +x ./gradlew
       - name: build
         run: ./gradlew build
-      - name: publish
-        run: ./gradlew modrinth
+      - uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          modrinth-id: text-randomizer
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}

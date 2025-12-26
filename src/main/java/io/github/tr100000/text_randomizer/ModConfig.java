@@ -19,6 +19,7 @@ public final class ModConfig {
     public boolean ignoreFormatSpecifiers = false;
     public boolean randomizeItemModels = false;
     public boolean hideItemIds = true;
+    public boolean shuffleItemGroups = false;
     public boolean useSeed = false;
     public long seed = 0;
     public boolean exportToResourcePack = false;
@@ -44,6 +45,7 @@ public final class ModConfig {
             INSTANCE.ignoreFormatSpecifiers = GsonHelper.getAsBoolean(json, "ignoreFormatSpecifiers", INSTANCE.ignoreFormatSpecifiers);
             INSTANCE.randomizeItemModels = GsonHelper.getAsBoolean(json, "randomizeItemModels", INSTANCE.randomizeItemModels);
             INSTANCE.hideItemIds = GsonHelper.getAsBoolean(json, "hideItemIds", INSTANCE.hideItemIds);
+            INSTANCE.shuffleItemGroups = GsonHelper.getAsBoolean(json, "shuffleItemGroups", INSTANCE.shuffleItemGroups);
             INSTANCE.useSeed = GsonHelper.getAsBoolean(json, "useSeed", INSTANCE.useSeed);
             INSTANCE.seed = GsonHelper.getAsLong(json, "seed", INSTANCE.seed);
             INSTANCE.exportToResourcePack = GsonHelper.getAsBoolean(json, "exportToResourcePack", INSTANCE.exportToResourcePack);
@@ -66,6 +68,7 @@ public final class ModConfig {
             json.addProperty("ignoreFormatSpecifiers", INSTANCE.ignoreFormatSpecifiers);
             json.addProperty("randomizeItemModels", INSTANCE.randomizeItemModels);
             json.addProperty("hideItemIds", INSTANCE.hideItemIds);
+            json.addProperty("shuffleItemGroups", INSTANCE.shuffleItemGroups);
             json.addProperty("useSeed", INSTANCE.useSeed);
             json.addProperty("seed", INSTANCE.seed);
             json.addProperty("exportToResourcePack", INSTANCE.exportToResourcePack);

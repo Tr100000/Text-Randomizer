@@ -41,6 +41,10 @@ dependencies {
 
 apply from: "https://raw.githubusercontent.com/Tr100000/modding-utils/main/scripts/devlogin.gradle"
 
+modrinth {
+    projectId = "text-randomizer"
+}
+
 spotless {
     format "misc", {
         target "*.gradle", "*.properties", ".gitattributes", ".gitignore"

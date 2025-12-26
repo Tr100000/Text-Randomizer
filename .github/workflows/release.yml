@@ -24,7 +24,7 @@ jobs:
       - name: make gradle wrapper executable
         run: chmod +x ./gradlew
       - name: build
-        run: ./gradlew build
+        run: ./gradlew build modrinthSyncBody
       - uses: Kir-Antipov/mc-publish@v3.3
         with:
           modrinth-id: text-randomizer

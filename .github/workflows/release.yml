@@ -23,10 +23,8 @@ jobs:
           distribution: 'microsoft'
       - name: make gradle wrapper executable
         run: chmod +x ./gradlew
-      - name: build
-        run: ./gradlew build modrinthSyncBody
+      - name: build and publish
+        run: ./gradlew build modrinth
       - uses: Kir-Antipov/mc-publish@v3.3
         with:
-          modrinth-id: rHerwnq0
-          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}

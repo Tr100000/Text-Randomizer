@@ -43,8 +43,11 @@ apply from: "https://raw.githubusercontent.com/Tr100000/modding-utils/main/scrip
 
 modrinth {
     projectId = "text-randomizer"
+    uploadFile = remapJar
     syncBodyFrom = rootProject.file("README.md").text
 }
+
+tasks.modrinth.dependsOn(tasks.modrinthSyncBody)
 
 spotless {
     format "misc", {

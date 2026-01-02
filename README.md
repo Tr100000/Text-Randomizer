@@ -1,9 +1,6 @@
 # Text Randomizer
-
-![Available for Fabric](https://raw.githubusercontent.com/intergrav/devins-badges/v3/assets/cozy/supported/fabric_vector.svg)
-![Won't support Forge](https://raw.githubusercontent.com/intergrav/devins-badges/v3/assets/cozy/unsupported/forge_vector.svg)
 <!-- modrinth_exclude.start -->
-[Link to Modrinth page](https://modrinth.com/mod/text-randomizer)
+[![Link to Modrinth page](https://raw.githubusercontent.com/intergrav/devins-badges/v3/assets/cozy/available/modrinth_vector.svg)](https://modrinth.com/mod/text-randomizer)
 <!-- modrinth_exclude.end -->
 Randomizes all translated text in Minecraft.
 

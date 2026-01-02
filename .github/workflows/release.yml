@@ -1,16 +1,10 @@
 name: release
 on:
-  release:
-    types:
-      - published
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-24.04
-    env:
-      MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
-    permissions:
-      contents: write
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -23,8 +17,9 @@ jobs:
           distribution: 'microsoft'
       - name: make gradle wrapper executable
         run: chmod +x ./gradlew
-      - name: build and publish
-        run: ./gradlew build modrinth
-      - uses: Kir-Antipov/mc-publish@v3.3
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: build
+        run: ./gradlew build
+      - name: publish
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+        run: ./gradlew modrinth

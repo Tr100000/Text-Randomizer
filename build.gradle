@@ -43,7 +43,10 @@ apply from: "https://raw.githubusercontent.com/Tr100000/modding-utils/main/scrip
 
 modrinth {
     projectId = "text-randomizer"
+    versionNumber = project.version
+    versionName = project.version
     uploadFile = remapJar
+    changelog = rootProject.file("CHANGELOG.md").text
     syncBodyFrom = rootProject.file("README.md").text
 }
 

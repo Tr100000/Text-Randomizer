@@ -5,11 +5,11 @@ import com.google.gson.JsonObject;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
+import org.apache.commons.io.FileUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Map;
 
 public final class ExportUtils {
@@ -53,15 +53,6 @@ public final class ExportUtils {
     }
 
     public static void deleteFolder(Path folder) throws IOException {
-        if (!Files.exists(folder)) return;
-        List<Path> paths = Files.list(folder).toList();
-        for (Path path : paths) {
-            if (Files.isDirectory(path)) {
-                deleteFolder(path);
-            } else {
-                Files.delete(path);
-            }
-        }
-        Files.delete(folder);
+        FileUtils.deleteDirectory(folder.toFile());
     }
 }

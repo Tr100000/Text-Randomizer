@@ -1,5 +1,5 @@
 plugins {
-    id "net.fabricmc.fabric-loom-remap" version "${loom_version}"
+    id "net.fabricmc.fabric-loom" version "${loom_version}"
     id "com.diffplug.spotless" version "8.+"
     id "com.modrinth.minotaur" version "2.+"
     id "maven-publish"
@@ -32,25 +32,13 @@ repositories {
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.officialMojangMappings()
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
-    modImplementation "dev.isxander:yet-another-config-lib:${project.yacl_version}-fabric"
+    compileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
+    compileOnly "dev.isxander:yet-another-config-lib:${project.yacl_version}-fabric"
 }
 
 apply from: "https://raw.githubusercontent.com/Tr100000/modding-utils/main/scripts/devlogin.gradle"
-
-modrinth {
-    projectId = "text-randomizer"
-    versionNumber = project.version
-    versionName = project.version
-    uploadFile = remapJar
-    changelog = rootProject.file("CHANGELOG.md").text
-    syncBodyFrom = rootProject.file("README.md").text
-}
-
-tasks.modrinth.dependsOn(tasks.modrinthSyncBody)
 
 spotless {
     format "misc", {
@@ -78,7 +66,7 @@ processResources {
 
 tasks.withType(JavaCompile).configureEach {
     it.options.encoding = "UTF-8"
-    it.options.release = 21
+    it.options.release = 25
 }
 
 tasks.withType(AbstractArchiveTask).configureEach {
@@ -87,8 +75,8 @@ tasks.withType(AbstractArchiveTask).configureEach {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
 }
 
 jar {
@@ -98,6 +86,17 @@ jar {
         rename { "${it}_${inputs.properties.archivesName}" }
     }
 }
+
+modrinth {
+    projectId = "text-randomizer"
+    versionNumber = project.version
+    versionName = project.version
+    uploadFile = jar
+    changelog = rootProject.file("CHANGELOG.md").text
+    syncBodyFrom = rootProject.file("README.md").text
+}
+
+tasks.modrinth.dependsOn(tasks.modrinthSyncBody)
 
 publishing {
     publications {

@@ -18,10 +18,6 @@ jobs:
         run: chmod +x ./gradlew
       - name: build
         run: ./gradlew build
-      - name: sync modrinth body
-        env:
-          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
-        run: ./gradlew modrinthSyncBody
       - name: capture build artifacts
         uses: actions/upload-artifact@v6
         with:

@@ -47,7 +47,7 @@ public abstract class ClientLanguageMixin {
                     seperatedMap.get(count).put(key, value);
                 });
 
-                seperatedMap.forEach((count, map) -> {
+                seperatedMap.forEach((_, map) -> {
                     List<String> originalKeys = new ArrayList<>(map.keySet());
                     List<String> shuffledKeys = Shuffle.shuffleList(new ArrayList<>(originalKeys));
 
@@ -61,7 +61,7 @@ public abstract class ClientLanguageMixin {
             return shuffled;
         }
         else {
-            if (ModConfig.should(c -> c.exportAll)) {
+            if (ModConfig.should(c -> c.exportToResourcePack && c.exportAll)) {
                 ExportUtils.trySaveLanguage(original);
             }
 

@@ -28,14 +28,20 @@ repositories {
             includeGroup "com.terraformersmc"
         }
     }
+    maven { // is this needed?
+        url = "https://maven.nucleoid.xyz"
+        content {
+            includeGroup "eu.pb4"
+        }
+    }
 }
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    compileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
-    compileOnly "dev.isxander:yet-another-config-lib:${project.yacl_version}-fabric"
+    implementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+    implementation "dev.isxander:yet-another-config-lib:${project.yacl_version}-fabric"
 }
 
 apply from: "https://raw.githubusercontent.com/Tr100000/modding-utils/main/scripts/devlogin.gradle"

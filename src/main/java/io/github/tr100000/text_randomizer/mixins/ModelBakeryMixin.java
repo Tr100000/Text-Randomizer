@@ -16,20 +16,20 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import java.util.Map;
 
 @Mixin(ModelBakery.class)
-public  abstract class ModelBakeryMixin {
+public abstract class ModelBakeryMixin {
     @ModifyVariable(method = "<init>", at = @At("HEAD"), ordinal = 1, argsOnly = true)
     private static Map<Identifier, ClientItem> shuffleItems(Map<Identifier, ClientItem> map) {
         if (ModConfig.should(c -> c.randomizeItemModels)) {
             Map<Identifier, ClientItem> newMap = Shuffle.shuffleMap(map);
 
-            if (ModConfig.INSTANCE.exportToResourcePack) {
+            if (ModConfig.should(c -> c.exportToResourcePack)) {
                 export(newMap);
             }
 
             return newMap;
         }
         else {
-            if (ModConfig.should(c -> c.exportAll)) {
+            if (ModConfig.should(c -> c.exportToResourcePack && c.exportAll)) {
                 export(map);
             }
 

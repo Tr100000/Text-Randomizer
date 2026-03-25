@@ -18,12 +18,12 @@
   },
   "mixins": ["text_randomizer.mixins.json"],
   "depends": {
-    "java": ">=21",
-    "fabricloader": "*",
-    "minecraft": "*"
+    "java": ">=25",
+    "fabricloader": ">=0.18",
+    "minecraft": ">=26.1"
   },
   "suggests": {
     "modmenu": "*",
-    "yet_another_config_lib_v3": ">=3.8"
+    "yet_another_config_lib_v3": ">=3.9"
   }
 }

@@ -28,12 +28,6 @@ repositories {
             includeGroup "com.terraformersmc"
         }
     }
-    maven { // is this needed?
-        url = "https://maven.nucleoid.xyz"
-        content {
-            includeGroup "eu.pb4"
-        }
-    }
 }
 
 dependencies {

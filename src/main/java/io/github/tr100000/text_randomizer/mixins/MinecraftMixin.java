@@ -9,7 +9,6 @@ import net.minecraft.SharedConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.metadata.pack.PackFormat;
-import org.jspecify.annotations.NonNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,7 +34,7 @@ public abstract class MinecraftMixin {
     }
 
     @Unique
-    private static @NonNull JsonObject createPackJson() {
+    private static JsonObject createPackJson() {
         JsonObject packJson = new JsonObject();
         PackFormat packVersion = SharedConstants.getCurrentVersion().packVersion(PackType.CLIENT_RESOURCES);
         JsonArray packVersionArray = new JsonArray();
@@ -48,7 +47,7 @@ public abstract class MinecraftMixin {
     }
 
     @Unique
-    private static @NonNull JsonObject createFilterJson() {
+    private static JsonObject createFilterJson() {
         JsonObject filterJson = new JsonObject();
         JsonArray filterBlocks = new JsonArray();
 

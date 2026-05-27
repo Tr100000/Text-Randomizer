@@ -1,7 +1,4 @@
 # Text Randomizer
-<!-- modrinth_exclude.start -->
-[![Link to Modrinth page](https://raw.githubusercontent.com/intergrav/devins-badges/v3/assets/cozy/available/modrinth_vector.svg)](https://modrinth.com/mod/text-randomizer)
-<!-- modrinth_exclude.end -->
 Randomizes all translated text in Minecraft.
 
 ## Features

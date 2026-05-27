@@ -51,6 +51,8 @@ public final class ModConfig {
             INSTANCE.exportToResourcePack = GsonHelper.getAsBoolean(json, "exportToResourcePack", INSTANCE.exportToResourcePack);
             INSTANCE.exportAll = GsonHelper.getAsBoolean(json, "exportAll", INSTANCE.exportAll);
             INSTANCE.generatedPackName = GsonHelper.getAsString(json, "generatedPackName", INSTANCE.generatedPackName);
+
+            save();
         }
         catch (IOException e) {
             throw new RuntimeException("Failed to load config file!", e);

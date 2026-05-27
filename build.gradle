@@ -94,6 +94,11 @@ modrinth {
     uploadFile = jar
     changelog = rootProject.file("CHANGELOG.md").text
     syncBodyFrom = rootProject.file("README.md").text
+
+    gameVersions.add(project.minecraft_version)
+    if (project.modrinth_extra_minecraft_versions) {
+        project.modrinth_extra_minecraft_versions.split(",").each { gameVersions.add(it.trim()) }
+    }
 }
 
 tasks.modrinth.dependsOn(tasks.modrinthSyncBody)

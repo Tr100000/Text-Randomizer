@@ -17,10 +17,10 @@ import java.util.Map;
 
 @Mixin(ModelBakery.class)
 public abstract class ModelBakeryMixin {
-    @ModifyVariable(method = "<init>", at = @At("HEAD"), ordinal = 1, argsOnly = true)
-    private static Map<Identifier, ClientItem> shuffleItems(Map<Identifier, ClientItem> map) {
+    @ModifyVariable(method = "<init>", at = @At("HEAD"), argsOnly = true, ordinal = 1)
+    private static Map<Identifier, ClientItem> shuffleItems(Map<Identifier, ClientItem> clientInfos) {
         if (ModConfig.should(c -> c.randomizeItemModels)) {
-            Map<Identifier, ClientItem> newMap = Shuffle.shuffleMap(map);
+            Map<Identifier, ClientItem> newMap = Shuffle.shuffleMap(clientInfos);
 
             if (ModConfig.should(c -> c.exportToResourcePack)) {
                 export(newMap);
@@ -30,10 +30,10 @@ public abstract class ModelBakeryMixin {
         }
         else {
             if (ModConfig.should(c -> c.exportToResourcePack && c.exportAll)) {
-                export(map);
+                export(clientInfos);
             }
 
-            return map;
+            return clientInfos;
         }
     }
 

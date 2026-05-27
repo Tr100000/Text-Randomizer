@@ -15,17 +15,17 @@ import java.util.Map;
 
 @Mixin(ClientLanguage.class)
 public abstract class ClientLanguageMixin {
-    @ModifyVariable(method = "<init>", at = @At("HEAD"), ordinal = 0, argsOnly = true)
-    private static Map<String, String> shuffle(Map<String, String> original) {
+    @ModifyVariable(method = "<init>", at = @At("HEAD"), argsOnly = true)
+    private static Map<String, String> shuffle(Map<String, String> storage) {
         if (ModConfig.should(c -> c.randomizeText)) {
-            Map<String, String> shuffled = new HashMap<>();
+            Map<String, String> shuffledStorage = new HashMap<>();
 
             Map<String, String> pool;
             if (ModConfig.INSTANCE.ignoreEmptyStrings) {
                 pool = new HashMap<>();
-                for (Map.Entry<String, String> entry : original.entrySet()) {
+                for (Map.Entry<String, String> entry : storage.entrySet()) {
                     if (entry.getValue().isEmpty()) {
-                        shuffled.put(entry.getKey(), entry.getValue());
+                        shuffledStorage.put(entry.getKey(), entry.getValue());
                     }
                     else {
                         pool.put(entry.getKey(), entry.getValue());
@@ -33,11 +33,11 @@ public abstract class ClientLanguageMixin {
                 }
             }
             else {
-                pool = original;
+                pool = storage;
             }
 
             if (ModConfig.INSTANCE.ignoreFormatSpecifiers) {
-                shuffled.putAll(Shuffle.shuffleMap(pool));
+                shuffledStorage.putAll(Shuffle.shuffleMap(pool));
             }
             else {
                 Map<Integer, Map<String, String>> seperatedMap = new HashMap<>();
@@ -52,20 +52,20 @@ public abstract class ClientLanguageMixin {
                     List<String> shuffledKeys = Shuffle.shuffleList(new ArrayList<>(originalKeys));
 
                     for (int i = 0; i < originalKeys.size(); i++) {
-                        shuffled.put(originalKeys.get(i), map.get(shuffledKeys.get(i)));
+                        shuffledStorage.put(originalKeys.get(i), map.get(shuffledKeys.get(i)));
                     }
                 });
             }
 
-            ExportUtils.trySaveLanguage(shuffled);
-            return shuffled;
+            ExportUtils.trySaveLanguage(shuffledStorage);
+            return shuffledStorage;
         }
         else {
             if (ModConfig.should(c -> c.exportToResourcePack && c.exportAll)) {
-                ExportUtils.trySaveLanguage(original);
+                ExportUtils.trySaveLanguage(storage);
             }
 
-            return original;
+            return storage;
         }
     }
 }

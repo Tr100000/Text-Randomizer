@@ -1,0 +1,31 @@
+license = "MIT"
+
+modLoader="javafml"
+loaderVersion="[1,)"
+
+[[mods]]
+modId = "${id}"
+displayName = "${name}"
+version = "${version}"
+authors = "Tr100000"
+description = "Randomizes all translated text in Minecraft."
+
+displayURL = "https://modrinth.com/project/text-randomizer"
+issueTrackerUrl = "https://github.com/Tr100000/Text-Randomizer/issues"
+updateJSONURL = "https://api.modrinth.com/updates/text-randomizer/forge_updates.json"
+
+[[mixings]]
+config = "text_randomizer.mixins.json"
+
+[[dependencies.${id}]]
+modId = "minecraft"
+type = "required"
+versionRange = "${minecraft}"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.${id}]]
+modId = "yet-another-config-lib-v3"
+type = "optional"
+ordering = "NONE"
+side = "CLIENT"

@@ -53,6 +53,7 @@ public final class ModYaclConfig {
                     )
                     .build()
                 )
+                //? if >=1.21.11 {
                 .group(OptionGroup.createBuilder()
                     .name(Component.literal("Items"))
                     .option(Option.<Boolean>createBuilder()
@@ -76,6 +77,7 @@ public final class ModYaclConfig {
                     )
                     .build()
                 )
+                //?}
                 .group(OptionGroup.createBuilder()
                     .name(Component.literal("Seed"))
                     .collapsed(true)

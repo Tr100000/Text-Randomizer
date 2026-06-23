@@ -10,8 +10,12 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {
+    //? if >=1.21.11 {
     @WrapOperation(method = "addDetailsToTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/resources/Identifier;toString()Ljava/lang/String;"))
+    //? } else {
+    /*@WrapOperation(method = "getTooltipLines", at = @At(value = "INVOKE", target = "Lnet/minecraft/resources/Identifier;toString()Ljava/lang/String;"))
+    *///? }
     private String replaceItemId(Identifier value, Operation<String> original) {
-        return ModConfig.should(c -> (c.randomizeText || c.randomizeItemModels) && c.hideItemIds) ? "item id goes here" : original.call(value);
+        return ModConfig.should(c -> c.hideItemIds) ? "item id goes here" : original.call(value);
     }
 }

@@ -1,11 +1,10 @@
 {
   "required": true,
   "package": "io.github.tr100000.text_randomizer.mixins",
-  "compatibilityLevel": "JAVA_25",
+  "compatibilityLevel": "${java}",
   "client": [
     "ClientLanguageMixin",
     "ItemStackMixin",
-    "MinecraftMixin",
     "ModelBakeryMixin"
   ],
   "injectors": {

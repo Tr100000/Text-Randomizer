@@ -1,6 +1,5 @@
 package io.github.tr100000.text_randomizer.mixins;
 
-import io.github.tr100000.text_randomizer.ExportUtils;
 import io.github.tr100000.text_randomizer.ModConfig;
 import io.github.tr100000.text_randomizer.Shuffle;
 import net.minecraft.client.resources.language.ClientLanguage;
@@ -47,7 +46,7 @@ public abstract class ClientLanguageMixin {
                     seperatedMap.get(count).put(key, value);
                 });
 
-                seperatedMap.forEach((_, map) -> {
+                seperatedMap.forEach((count, map) -> {
                     List<String> originalKeys = new ArrayList<>(map.keySet());
                     List<String> shuffledKeys = Shuffle.shuffleList(new ArrayList<>(originalKeys));
 
@@ -57,14 +56,9 @@ public abstract class ClientLanguageMixin {
                 });
             }
 
-            ExportUtils.trySaveLanguage(shuffledStorage);
             return shuffledStorage;
         }
         else {
-            if (ModConfig.should(c -> c.exportToResourcePack && c.exportAll)) {
-                ExportUtils.trySaveLanguage(storage);
-            }
-
             return storage;
         }
     }

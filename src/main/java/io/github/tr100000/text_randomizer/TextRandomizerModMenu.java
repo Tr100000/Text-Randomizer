@@ -1,5 +1,6 @@
 package io.github.tr100000.text_randomizer;
 
+//? if fabric {
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 
@@ -9,3 +10,4 @@ public class TextRandomizerModMenu implements ModMenuApi {
         return ModConfig.canUseYaclConfig() ? ModYaclConfig::generateScreen : ModMenuApi.super.getModConfigScreenFactory();
     }
 }
+//?}

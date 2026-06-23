@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "text_randomizer",
+  "id": "${id}",
   "version": "${version}",
-  "name": "Text Randomizer",
+  "name": "${name}",
   "description": "Randomizes all translated text in Minecraft.",
   "authors": ["Tr100000"],
   "contact": {
@@ -13,17 +13,19 @@
   "license": "MIT",
   "environment": "client",
   "entrypoints": {
-    "client": ["io.github.tr100000.text_randomizer.TextRandomizer"],
+    "client": ["io.github.tr100000.text_randomizer.TextRandomizerFabric"],
     "modmenu": ["io.github.tr100000.text_randomizer.TextRandomizerModMenu"]
   },
-  "mixins": ["text_randomizer.mixins.json"],
+  "mixins": [
+    "text_randomizer.mixins.json"
+  ],
+  "accessWidener": "text_randomizer.ct",
   "depends": {
-    "java": ">=25",
-    "fabricloader": ">=0.18",
-    "minecraft": ">=26.1"
+    "fabricloader": ">=0.19",
+    "minecraft": "${minecraft}"
   },
   "suggests": {
     "modmenu": "*",
-    "yet_another_config_lib_v3": ">=3.9"
+    "yet_another_config_lib_v3": "*"
   }
 }

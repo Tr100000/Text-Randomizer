@@ -1,5 +1,8 @@
 plugins {
     id("dev.kikugie.loom-back-compat")
+    kotlin("jvm")
+    id("com.google.devtools.ksp")
+    id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
 }
 
 // DO NOT set group = ...!
@@ -48,12 +51,14 @@ dependencies {
     excludeFabricImplementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-fabric")
 }
 
+fletchingTable {
+    j52j.register("main") {
+        extension("json", "*.mixins.json5")
+    }
+}
+
 loom {
     fabricModJsonPath = rootProject.file("src/main/resources/fabric.mod.json")
-    accessWidenerPath = sc.process(
-        rootProject.file("src/main/resources/text_randomizer.ct"),
-        "build/processed.ct"
-    )
 
     decompilerOptions.named("vineflower") {
         options.put("mark-corresponding-synthetics", "1")
@@ -72,6 +77,7 @@ java {
     sourceCompatibility = requiredJava
 
     toolchain {
+        vendor = JvmVendorSpec.ADOPTIUM
         languageVersion = JavaLanguageVersion.of(requiredJava.majorVersion)
     }
 }
@@ -95,6 +101,7 @@ tasks {
 
         val mixinJava = "JAVA_${requiredJava.majorVersion}"
         filesMatching("*.mixins.json") { expand("java" to mixinJava) }
+        filesMatching("*.mixins.json5") { expand("java" to mixinJava) }
 
         exclude("META-INF/neoforge.mods.toml")
     }

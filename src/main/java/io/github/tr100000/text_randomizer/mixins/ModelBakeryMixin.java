@@ -14,7 +14,7 @@ import java.util.Map;
 
 @Mixin(ModelBakery.class)
 public abstract class ModelBakeryMixin {
-    @ModifyVariable(method = "<init>", at = @At("HEAD"), argsOnly = true, ordinal = 1)
+    @ModifyVariable(method = "<init>*", at = @At("HEAD"), argsOnly = true, ordinal = 1)
     private static Map<Identifier, ClientItem> shuffleItems(Map<Identifier, ClientItem> clientInfos) {
         if (ModConfig.should(c -> c.randomizeItemModels)) {
             return Shuffle.shuffleMap(clientInfos);

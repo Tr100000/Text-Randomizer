@@ -4,7 +4,9 @@
   "compatibilityLevel": "${java}",
   "client": [
     "ClientLanguageMixin",
+    "CreativeModeTabMixin",
     "ItemStackMixin",
+    //? if >=1.21.11
     "ModelBakeryMixin"
   ],
   "injectors": {
@@ -12,8 +14,5 @@
   },
   "overwrites": {
     "requireAnnotations": true
-  },
-  "mixins": [
-    "CreativeModeTabMixin"
-  ]
+  }
 }

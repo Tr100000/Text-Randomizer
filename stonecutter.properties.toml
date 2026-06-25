@@ -12,7 +12,6 @@ deps.yacl = "3.8.2+1.21.1"
 
 [fabric."1.21.1"]
 mod.mc_compat = ">=1.21 <=1.21.1"
-deps.fabric_api = "0.116.12+1.21.1"
 deps.modmenu = "11.0.4"
 
 [neoforge."1.21.1"]
@@ -25,35 +24,20 @@ deps.yacl = "3.8.2+1.21.11"
 
 [fabric."1.21.11"]
 mod.mc_compat = "1.21.11"
-deps.fabric_api = "0.141.4+1.21.11"
 deps.modmenu = "17.0.0"
 
 [neoforge."1.21.11"]
 mod.mc_compat = "[1.21.11]"
 deps.neo_loader = "21.11.42"
 
-["26.1.x"]
-mod.mc_releases = ["26.1", "26.1.1", "26.1.2", "26w14a"]
-deps.yacl = "3.9.4+26.1"
-
-[fabric."26.1.x"]
-mod.mc_compat = "~26.1"
-deps.fabric_api = "0.153.0+26.1.2"
-deps.modmenu = "18.0.0-beta.1"
-
-[neoforge."26.1.x"]
-mod.mc_compat = "[26.1, 26.2)"
-deps.neo_loader = "26.1.2.76"
-
-["26.2.x"]
-mod.mc_releases = ["26.2"]
+["26.x"]
+mod.mc_releases = ["26.1", "26.1.1", "26.1.2", "26w14a", "26.2"]
 deps.yacl = "3.9.4+26.2"
 
-[fabric."26.2.x"]
-mod.mc_compat = "~26.2"
-deps.fabric_api = "0.153.0+26.2"
+[fabric."26.x"]
+mod.mc_compat = "^26"
 deps.modmenu = "20.0.0-beta.4"
 
-[neoforge."26.2.x"]
-mod.mc_compat = "[26.2, 26.3)"
+[neoforge."26.x"]
+mod.mc_compat = "[26, 27)"
 deps.neo_loader = "26.2.0.6-beta"

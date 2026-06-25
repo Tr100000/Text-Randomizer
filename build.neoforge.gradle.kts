@@ -1,6 +1,9 @@
 plugins {
     id("net.neoforged.moddev") version "2.0.140"
     id("neoforge-mutex")
+    kotlin("jvm")
+    id("com.google.devtools.ksp")
+    id("dev.kikugie.fletching-table.neoforge") version "0.1.0-alpha.22"
 }
 
 version = "${property("mod.version")}+${sc.current.version}"
@@ -33,11 +36,17 @@ dependencies {
     implementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-neoforge")
 }
 
+fletchingTable {
+    j52j.register("main") {
+        extension("json", "*.mixins.json5")
+    }
+}
+
 neoForge {
     version = property("deps.neo_loader") as String
 
     mods {
-        register("template") {
+        register("text_randomizer") {
             sourceSet(sourceSets.main.get())
         }
     }
@@ -80,6 +89,7 @@ tasks {
 
         val mixinJava = "JAVA_${requiredJava.majorVersion}"
         filesMatching("*.mixins.json") { expand("java" to mixinJava) }
+        filesMatching("*.mixins.json5") { expand("java" to mixinJava) }
 
         exclude("fabric.mod.json", "*.ct", "*.classtweaker")
     }

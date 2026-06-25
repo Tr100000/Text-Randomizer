@@ -19,6 +19,9 @@ plugins {
 
     // https://github.com/gradle/foojay-toolchains
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
+
+    kotlin("jvm") version "2.3.21" apply false
+    id("com.google.devtools.ksp") version "2.2.21-2.0.5" apply false
 }
 
 stonecutter {
@@ -29,9 +32,8 @@ stonecutter {
 
         match("1.21.1", "fabric", "neoforge")
         match("1.21.11", "fabric", "neoforge")
-        match("26.1.x", "fabric", "neoforge", version = "26.1.2")
-        match("26.2.x", "fabric", "neoforge", version = "26.2")
-        vcsVersion = "26.2.x-fabric"
+        match("26.x", "fabric", "neoforge", version = "26.2")
+        vcsVersion = "26.x-fabric"
     }
 }
 

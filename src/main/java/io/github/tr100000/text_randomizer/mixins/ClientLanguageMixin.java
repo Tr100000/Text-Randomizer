@@ -14,7 +14,7 @@ import java.util.Map;
 
 @Mixin(ClientLanguage.class)
 public abstract class ClientLanguageMixin {
-    @ModifyVariable(method = "<init>", at = @At("HEAD"), argsOnly = true)
+    @ModifyVariable(method = "<init>*", at = @At("HEAD"), argsOnly = true, ordinal = 0)
     private static Map<String, String> shuffle(Map<String, String> storage) {
         if (ModConfig.should(c -> c.randomizeText)) {
             Map<String, String> shuffledStorage = new HashMap<>();
@@ -41,7 +41,7 @@ public abstract class ClientLanguageMixin {
             else {
                 Map<Integer, Map<String, String>> seperatedMap = new HashMap<>();
                 pool.forEach((key, value) -> {
-                    int count = value.split("%(\\d\\$)?s", -1).length;
+                    int count = value.split("%(?:\\d+\\$)?[a-z]", -1).length;
                     seperatedMap.computeIfAbsent(count, HashMap::new);
                     seperatedMap.get(count).put(key, value);
                 });

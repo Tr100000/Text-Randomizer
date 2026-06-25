@@ -11,6 +11,7 @@
     "issues": "https://github.com/Tr100000/Text-Randomizer/issues"
   },
   "license": "MIT",
+  "icon": "assets/text_randomizer/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": ["io.github.tr100000.text_randomizer.TextRandomizerFabric"],
@@ -19,7 +20,6 @@
   "mixins": [
     "text_randomizer.mixins.json"
   ],
-  "accessWidener": "text_randomizer.ct",
   "depends": {
     "fabricloader": ">=0.19",
     "minecraft": "${minecraft}"

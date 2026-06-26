@@ -1,6 +1,8 @@
 package io.github.tr100000.text_randomizer.config;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
 import io.github.tr100000.text_randomizer.ModLoaderAccess;
@@ -9,7 +11,6 @@ import io.github.tr100000.text_randomizer.config.option.BooleanOption;
 import io.github.tr100000.text_randomizer.config.option.GroupOption;
 import io.github.tr100000.text_randomizer.config.option.LongOption;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.StrictJsonParser;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.io.IOException;
@@ -82,8 +83,10 @@ public final class ModConfig extends GroupOption<ModConfig> {
                 return;
             }
 
-            JsonElement json = StrictJsonParser.parse(Files.newBufferedReader(TextRandomizer.CONFIG_PATH));
-            INSTANCE.decode(JsonOps.INSTANCE, json);
+            try (JsonReader jsonReader = new JsonReader(Files.newBufferedReader(TextRandomizer.CONFIG_PATH))) {
+                JsonElement json = JsonParser.parseReader(jsonReader);
+                INSTANCE.decode(JsonOps.INSTANCE, json);
+            }
 
             TextRandomizer.LOGGER.info("Loaded config file");
         }

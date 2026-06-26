@@ -22,4 +22,4 @@ jobs:
       - name: publish
         env:
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
-        run: ./gradlew modrinth
+        run: ./gradlew modrinth --no-parallel --no-configuration-cache

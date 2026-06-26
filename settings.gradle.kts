@@ -22,6 +22,8 @@ plugins {
 
     kotlin("jvm") version "2.3.21" apply false
     id("com.google.devtools.ksp") version "2.2.21-2.0.5" apply false
+
+    id("com.modrinth.minotaur") version "2.9.+" apply false
 }
 
 stonecutter {

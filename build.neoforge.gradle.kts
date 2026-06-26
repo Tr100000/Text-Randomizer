@@ -4,6 +4,7 @@ plugins {
     kotlin("jvm")
     id("com.google.devtools.ksp")
     id("dev.kikugie.fletching-table.neoforge") version "0.1.0-alpha.22"
+    id("com.modrinth.minotaur")
 }
 
 version = "${property("mod.version")}+${sc.current.version}"
@@ -16,6 +17,9 @@ val requiredJava = when {
     sc.current.parsed >= "1.17" -> JavaVersion.VERSION_16
     else -> JavaVersion.VERSION_1_8
 }
+
+val compatibleVersions: List<String> = sc.properties.rawOrNull("mod", "mc_releases")
+    ?.asList().orEmpty().map { it.toString() }
 
 repositories {
     fun strictMaven(url: String, alias: String, vararg groups: String) = exclusiveContent {
@@ -106,4 +110,16 @@ tasks {
         from(jar.flatMap { it.archiveFile }, named<Jar>("sourcesJar").flatMap { it.archiveFile })
         into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
     }
+}
+
+modrinth {
+    projectId.set("text-randomizer")
+    versionNumber.set("${version}-neoforge")
+    versionName.set("${version}-neoforge")
+    changelog = rootProject.file("CHANGELOG.md").readText()
+    uploadFile.set(tasks.jar)
+    additionalFiles.add(tasks.named<Jar>("sourcesJar"))
+    compatibleVersions.forEach { gameVersions.add(it.trim()) }
+    debugMode = true
+    token = ""
 }

@@ -53,9 +53,9 @@ public final class ModYaclConfig {
                     )
                     .build()
                 )
-                //? if >=1.21.11 {
                 .group(OptionGroup.createBuilder()
                     .name(Component.literal("Items"))
+                    //? if >=1.21.11 {
                     .option(Option.<Boolean>createBuilder()
                         .name(Component.literal("Randomize Item Models"))
                         .binding(false, () -> ModConfig.INSTANCE.randomizeItemModels, newValue -> ModConfig.INSTANCE.randomizeItemModels = newValue)
@@ -63,6 +63,7 @@ public final class ModYaclConfig {
                         .controller(TickBoxControllerBuilder::create)
                         .build()
                     )
+                    //?}
                     .option(Option.<Boolean>createBuilder()
                         .name(Component.literal("Hide Item Ids"))
                         .binding(true, () -> ModConfig.INSTANCE.hideItemIds, newValue -> ModConfig.INSTANCE.hideItemIds = newValue)
@@ -77,7 +78,6 @@ public final class ModYaclConfig {
                     )
                     .build()
                 )
-                //?}
                 .group(OptionGroup.createBuilder()
                     .name(Component.literal("Seed"))
                     .collapsed(true)

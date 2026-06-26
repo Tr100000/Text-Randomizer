@@ -3,6 +3,7 @@ plugins {
     kotlin("jvm")
     id("com.google.devtools.ksp")
     id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
+    id("com.modrinth.minotaur")
 }
 
 // DO NOT set group = ...!
@@ -114,4 +115,16 @@ tasks {
         from(loomx.modJar.flatMap { it.archiveFile }, loomx.modSourcesJar.flatMap { it.archiveFile })
         into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
     }
+}
+
+modrinth {
+    projectId.set("text-randomizer")
+    versionNumber.set("${version}-fabric")
+    versionName.set("${version}-fabric")
+    changelog = rootProject.file("CHANGELOG.md").readText()
+    uploadFile.set(loomx.modJar)
+    additionalFiles.add(loomx.modSourcesJar)
+    compatibleVersions.forEach { gameVersions.add(it.trim()) }
+    debugMode = true
+    token = ""
 }

@@ -120,6 +120,4 @@ modrinth {
     uploadFile.set(tasks.jar)
     additionalFiles.add(tasks.named<Jar>("sourcesJar"))
     compatibleVersions.forEach { gameVersions.add(it.trim()) }
-    debugMode = true
-    token = ""
 }

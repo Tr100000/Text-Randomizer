@@ -1,8 +1,9 @@
 package io.github.tr100000.text_randomizer.mixins;
 
 //? if >=1.21.11 {
-import io.github.tr100000.text_randomizer.ModConfig;
+
 import io.github.tr100000.text_randomizer.Shuffle;
+import io.github.tr100000.text_randomizer.config.ModConfig;
 import net.minecraft.client.renderer.item.ClientItem;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.resources.Identifier;
@@ -16,7 +17,7 @@ import java.util.Map;
 public abstract class ModelBakeryMixin {
     @ModifyVariable(method = "<init>*", at = @At("HEAD"), argsOnly = true, ordinal = 1)
     private static Map<Identifier, ClientItem> shuffleItems(Map<Identifier, ClientItem> clientInfos) {
-        if (ModConfig.should(c -> c.randomizeItemModels)) {
+        if (ModConfig.check(c -> c.items.randomizeModels)) {
             return Shuffle.shuffleMap(clientInfos);
         }
         else {

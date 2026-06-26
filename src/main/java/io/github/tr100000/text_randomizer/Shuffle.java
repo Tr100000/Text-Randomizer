@@ -1,8 +1,10 @@
 package io.github.tr100000.text_randomizer;
 
-import java.util.ArrayList;
+import io.github.tr100000.text_randomizer.config.ModConfig;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -11,10 +13,12 @@ public final class Shuffle {
     private Shuffle() {}
 
     public static <T, E> Map<T, E> shuffleMap(Map<T, E> original) {
-        Map<T, E> shuffled = new HashMap<>();
+        Map<T, E> shuffled = new Object2ObjectOpenHashMap<>();
 
-        List<T> originalKeys = new ArrayList<>(original.keySet());
-        List<T> shuffledKeys = shuffleList(new ArrayList<>(originalKeys));
+        List<T> originalKeys = new ObjectArrayList<>(original.keySet());
+        List<T> shuffledKeys = shuffleList(new ObjectArrayList<>(originalKeys));
+
+        originalKeys.forEach(key -> shuffled.put(key, original.get(key)));
 
         for (int i = 0; i < originalKeys.size(); i++) {
             shuffled.put(originalKeys.get(i), original.get(shuffledKeys.get(i)));
@@ -29,6 +33,6 @@ public final class Shuffle {
     }
 
     public static Random getRandom() {
-        return ModConfig.INSTANCE.useSeed ? new Random(ModConfig.INSTANCE.seed) : new Random();
+        return ModConfig.INSTANCE.seed.useSeed.getValue() ? new Random(ModConfig.INSTANCE.seed.seed.getValue()) : new Random();
     }
 }

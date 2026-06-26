@@ -125,6 +125,4 @@ modrinth {
     uploadFile.set(loomx.modJar)
     additionalFiles.add(loomx.modSourcesJar)
     compatibleVersions.forEach { gameVersions.add(it.trim()) }
-    debugMode = true
-    token = ""
 }

@@ -1,7 +1,9 @@
 package io.github.tr100000.text_randomizer;
 
 //? if neoforge {
-/*import net.neoforged.api.distmarker.Dist;
+/*import io.github.tr100000.text_randomizer.config.ModConfig;
+import io.github.tr100000.text_randomizer.integration.ModYaclConfig;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModLoadingContext;

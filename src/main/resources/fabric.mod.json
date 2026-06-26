@@ -15,7 +15,7 @@
   "environment": "client",
   "entrypoints": {
     "client": ["io.github.tr100000.text_randomizer.TextRandomizerFabric"],
-    "modmenu": ["io.github.tr100000.text_randomizer.TextRandomizerModMenu"]
+    "modmenu": ["io.github.tr100000.text_randomizer.integration.TextRandomizerModMenu"]
   },
   "mixins": [
     "text_randomizer.mixins.json"

@@ -1,7 +1,8 @@
 package io.github.tr100000.text_randomizer.mixins;
 
-import io.github.tr100000.text_randomizer.ModConfig;
 import io.github.tr100000.text_randomizer.Shuffle;
+import io.github.tr100000.text_randomizer.config.ModConfig;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -11,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 
@@ -25,15 +25,15 @@ public abstract class CreativeModeTabMixin {
 
     @Inject(method = "getDisplayItems", at = @At("HEAD"), cancellable = true)
     private void getDisplayItems(CallbackInfoReturnable<Collection<ItemStack>> cir) {
-        if (ModConfig.should(c -> c.shuffleItemGroups)) {
-            cir.setReturnValue(Shuffle.shuffleList(new ArrayList<>(displayItems)));
+        if (ModConfig.check(c -> c.items.shuffleItemGroups)) {
+            cir.setReturnValue(Shuffle.shuffleList(new ObjectArrayList<>(displayItems)));
         }
     }
 
     @Inject(method = "getSearchTabDisplayItems", at = @At("HEAD"), cancellable = true)
     private void getSearchTabDisplayItems(CallbackInfoReturnable<Collection<ItemStack>> cir) {
-        if (ModConfig.should(c -> c.shuffleItemGroups)) {
-            cir.setReturnValue(new ObjectOpenHashSet<>(Shuffle.shuffleList(new ArrayList<>(displayItemsSearchTab))));
+        if (ModConfig.check(c -> c.items.shuffleItemGroups)) {
+            cir.setReturnValue(new ObjectOpenHashSet<>(Shuffle.shuffleList(new ObjectArrayList<>(displayItemsSearchTab))));
         }
     }
 }

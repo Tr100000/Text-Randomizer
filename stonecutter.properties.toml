@@ -1,7 +1,7 @@
 mod.id = "text_randomizer"
 mod.name = "Text Randomizer"
 mod.group = "io.github.tr100000.text_randomizer"
-mod.version = "0.2.0"
+mod.version = "0.2.1"
 
 deps.fabric_loader = "0.19.3"
 loomx.loom_version = "1.17-SNAPSHOT"

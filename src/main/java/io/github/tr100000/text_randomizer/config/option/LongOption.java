@@ -16,6 +16,6 @@ public class LongOption extends SimpleOption<Long> {
 
     @Override
     public <V> void decode(DynamicOps<V> ops, V input) {
-        ops.getNumberValue(input).ifSuccess(n -> setValue((long)n));
+        ops.getNumberValue(input).ifSuccess(n -> setValue(n.longValue()));
     }
 }

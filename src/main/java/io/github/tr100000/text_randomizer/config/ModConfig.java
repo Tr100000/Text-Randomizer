@@ -89,6 +89,8 @@ public final class ModConfig extends GroupOption<ModConfig> {
             }
 
             TextRandomizer.LOGGER.info("Loaded config file");
+
+            save();
         }
         catch (IOException e) {
             TextRandomizer.LOGGER.error("Failed to load config file", e);

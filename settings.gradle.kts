@@ -12,10 +12,10 @@ pluginManagement {
 
 plugins {
     // https://stonecutter.kikugie.dev/blog/changes/0.9
-    id("dev.kikugie.stonecutter") version "0.9.6"
+    id("dev.kikugie.stonecutter") version "0.9.7"
 
     // https://codeberg.org/KikuGie/loom-back-compat
-    id("dev.kikugie.loom-back-compat") version "0.3"
+    id("dev.kikugie.loom-back-compat") version "0.4"
 
     // https://github.com/gradle/foojay-toolchains
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"

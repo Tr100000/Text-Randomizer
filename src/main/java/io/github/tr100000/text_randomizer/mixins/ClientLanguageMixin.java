@@ -16,14 +16,14 @@ public abstract class ClientLanguageMixin {
     @ModifyVariable(method = "<init>*", at = @At("HEAD"), argsOnly = true, ordinal = 0)
     private static Map<String, String> shuffle(Map<String, String> storage) {
         if (ModConfig.check(c -> c.text.randomize)) {
-            Map<String, String> shuffledStorage = new Object2ObjectOpenHashMap<>();
+            Map<String, String> finishedStorage = new Object2ObjectOpenHashMap<>();
 
             Map<String, String> pool;
             if (ModConfig.INSTANCE.text.ignoreEmptyStrings.getValue()) {
                 pool = new HashMap<>();
                 for (Map.Entry<String, String> entry : storage.entrySet()) {
                     if (entry.getValue().isEmpty()) {
-                        shuffledStorage.put(entry.getKey(), entry.getValue());
+                        finishedStorage.put(entry.getKey(), entry.getValue());
                     }
                     else {
                         pool.put(entry.getKey(), entry.getValue());
@@ -35,7 +35,7 @@ public abstract class ClientLanguageMixin {
             }
 
             if (ModConfig.INSTANCE.text.ignoreFormatSpecifiers.getValue()) {
-                shuffledStorage.putAll(Shuffle.shuffleMap(pool));
+                finishedStorage.putAll(Shuffle.shuffleMap(pool));
             }
             else {
                 Map<Integer, Map<String, String>> seperatedMap = new Object2ObjectOpenHashMap<>();
@@ -45,10 +45,10 @@ public abstract class ClientLanguageMixin {
                     seperatedMap.get(count).put(key, value);
                 });
 
-                seperatedMap.forEach((count, map) -> shuffledStorage.putAll(Shuffle.shuffleMap(map)));
+                seperatedMap.forEach((count, map) -> finishedStorage.putAll(Shuffle.shuffleMap(map)));
             }
 
-            return shuffledStorage;
+            return finishedStorage;
         }
         else {
             return storage;

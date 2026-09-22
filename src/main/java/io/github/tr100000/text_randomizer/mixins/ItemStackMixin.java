@@ -10,7 +10,9 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {
-    //? if >=1.21.11 {
+    //? if >=26 && neoforge {
+    /*@WrapOperation(method = "addDetailsToTooltipTail", at = @At(value = "INVOKE", target = "Lnet/minecraft/resources/Identifier;toString()Ljava/lang/String;"))
+    *///? } else if >=1.21.11 {
     @WrapOperation(method = "addDetailsToTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/resources/Identifier;toString()Ljava/lang/String;"))
     //? } else {
     /*@WrapOperation(method = "getTooltipLines", at = @At(value = "INVOKE", target = "Lnet/minecraft/resources/Identifier;toString()Ljava/lang/String;"))

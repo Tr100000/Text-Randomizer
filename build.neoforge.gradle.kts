@@ -1,10 +1,8 @@
 plugins {
-    id("net.neoforged.moddev") version "2.0.140"
+    id("net.neoforged.moddev") version "2.0.147"
     id("neoforge-mutex")
-    kotlin("jvm")
-    id("com.google.devtools.ksp")
-    id("dev.kikugie.fletching-table.neoforge") version "0.1.0-alpha.22"
     id("com.modrinth.minotaur")
+    alias(ft.plugins.mixin)
 }
 
 version = "${property("mod.version")}+${sc.current.version}"
@@ -41,8 +39,10 @@ dependencies {
 }
 
 fletchingTable {
-    j52j.register("main") {
-        extension("json", "*.mixins.json5")
+    mixins.configure(sourceSets.main) {
+        mixin("text_randomizer.mixins.json") {
+            env("CLIENT")
+        }
     }
 }
 
@@ -93,13 +93,19 @@ tasks {
 
         val mixinJava = "JAVA_${requiredJava.majorVersion}"
         filesMatching("*.mixins.json") { expand("java" to mixinJava) }
-        filesMatching("*.mixins.json5") { expand("java" to mixinJava) }
 
         exclude("fabric.mod.json", "*.ct", "*.classtweaker")
     }
 
     named("createMinecraftArtifacts") {
         dependsOn("stonecutterGenerate")
+    }
+
+    // Includes the license file in the built mod
+    withType<Jar> {
+        val name = project.property("mod.id")
+        inputs.property("mod_id", name)
+        from("../../LICENSE") { rename { "$it-$name" } }
     }
 
     register<Copy>("buildAndCollect") {

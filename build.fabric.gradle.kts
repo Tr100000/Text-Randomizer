@@ -1,9 +1,7 @@
 plugins {
     id("dev.kikugie.loom-back-compat")
-    kotlin("jvm")
-    id("com.google.devtools.ksp")
-    id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
     id("com.modrinth.minotaur")
+    alias(ft.plugins.mixin)
 }
 
 // DO NOT set group = ...!
@@ -53,8 +51,10 @@ dependencies {
 }
 
 fletchingTable {
-    j52j.register("main") {
-        extension("json", "*.mixins.json5")
+    mixins.configure(sourceSets.main) {
+        mixin("text_randomizer.mixins.json") {
+            env("CLIENT")
+        }
     }
 }
 
@@ -102,9 +102,15 @@ tasks {
 
         val mixinJava = "JAVA_${requiredJava.majorVersion}"
         filesMatching("*.mixins.json") { expand("java" to mixinJava) }
-        filesMatching("*.mixins.json5") { expand("java" to mixinJava) }
 
         exclude("META-INF/neoforge.mods.toml")
+    }
+
+    // Includes the license file in the built mod
+    withType<Jar> {
+        val name = project.property("mod.id")
+        inputs.property("mod_id", name)
+        from("../../LICENSE") { rename { "$it-$name" } }
     }
 
     register<Copy>("buildAndCollect") {

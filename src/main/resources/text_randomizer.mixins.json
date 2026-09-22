@@ -2,13 +2,6 @@
   "required": true,
   "package": "io.github.tr100000.text_randomizer.mixins",
   "compatibilityLevel": "${java}",
-  "client": [
-    "ClientLanguageMixin",
-    "CreativeModeTabMixin",
-    "ItemStackMixin",
-    //? if >=1.21.11
-    "ModelBakeryMixin"
-  ],
   "injectors": {
     "defaultRequire": 1
   },

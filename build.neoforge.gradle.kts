@@ -1,5 +1,5 @@
 plugins {
-    id("net.neoforged.moddev") version "2.0.147"
+    id("net.neoforged.moddev") version "2.0.148"
     id("neoforge-mutex")
     id("com.modrinth.minotaur")
     alias(ft.plugins.mixin)

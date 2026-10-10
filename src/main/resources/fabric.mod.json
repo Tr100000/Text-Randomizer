@@ -20,6 +20,7 @@
   "mixins": [
     "text_randomizer.mixins.json"
   ],
+  "accessWidener": "text_randomizer.ct",
   "depends": {
     "fabricloader": ">=0.19",
     "minecraft": "${minecraft}"

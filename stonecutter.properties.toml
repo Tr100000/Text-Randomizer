@@ -1,7 +1,7 @@
 mod.id = "text_randomizer"
 mod.name = "Text Randomizer"
 mod.group = "io.github.tr100000.text_randomizer"
-mod.version = "0.2.2"
+mod.version = "0.3.0"
 
 deps.fabric_loader = "0.19.5"
 loomx.loom_version = "1.18-SNAPSHOT"
@@ -12,11 +12,11 @@ deps.yacl = "3.8.2+1.21.1"
 
 [fabric."1.21.1"]
 mod.mc_compat = ">=1.21 <=1.21.1"
-deps.modmenu = "11.0.4"
+deps.modmenu = "11.0.5"
 
 [neoforge."1.21.1"]
 mod.mc_compat = "[1.21, 1.21.1]"
-deps.neo_loader = "21.1.251"
+deps.neo_loader = "21.1.256"
 
 ["1.21.11"]
 mod.mc_releases = ["1.21.11"]
@@ -24,7 +24,7 @@ deps.yacl = "3.8.2+1.21.11"
 
 [fabric."1.21.11"]
 mod.mc_compat = "1.21.11"
-deps.modmenu = "17.0.0"
+deps.modmenu = "17.0.1"
 
 [neoforge."1.21.11"]
 mod.mc_compat = "[1.21.11]"
@@ -36,8 +36,8 @@ deps.yacl = "3.9.7+26.3"
 
 [fabric."26.x"]
 mod.mc_compat = "^26"
-deps.modmenu = "21.0.0-beta.1"
+deps.modmenu = "21.0.0"
 
 [neoforge."26.x"]
 mod.mc_compat = "[26, 27)"
-deps.neo_loader = "26.3.0.7-beta"
+deps.neo_loader = "26.3.0.58-beta"

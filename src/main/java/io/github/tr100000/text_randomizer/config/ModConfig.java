@@ -23,15 +23,16 @@ public final class ModConfig extends GroupOption<ModConfig> {
 
     private ModConfig() {}
 
-    public BooleanOption modEnabled = add(new BooleanOption(true, "mod_enabled", Component.literal("Mod Enabled")));
-    public TextSettings text = add(new TextSettings());
-    public ItemSettings items = add(new ItemSettings());
-    public SeedSettings seed = add(new SeedSettings());
+    public final BooleanOption modEnabled = add(new BooleanOption(true, "mod_enabled", Component.literal("Mod Enabled")));
+    public final TextSettings text = add(new TextSettings());
+    public final ItemSettings items = add(new ItemSettings());
+    public final TextureSettings textures = add(new TextureSettings());
+    public final SeedSettings seed = add(new SeedSettings());
 
     public static class TextSettings extends GroupOption<TextSettings> {
-        public BooleanOption randomize = add(new BooleanOption(true, "randomize", Component.literal("Randomize Text")));
-        public BooleanOption ignoreEmptyStrings = add(new BooleanOption(true ,"ignore_empty_strings", Component.literal("Ignore Empty Strings")));
-        public BooleanOption ignoreFormatSpecifiers = add(new BooleanOption(false, "ignore_format_specifiers", Component.literal("Ignore Format Specifiers")));
+        public final BooleanOption randomize = add(new BooleanOption(true, "randomize", Component.literal("Randomize Text")));
+        public final BooleanOption ignoreEmptyStrings = add(new BooleanOption(true ,"ignore_empty_strings", Component.literal("Ignore Empty Strings")));
+        public final BooleanOption ignoreFormatSpecifiers = add(new BooleanOption(false, "ignore_format_specifiers", Component.literal("Ignore Format Specifiers")));
 
         @Override
         public String getName() {
@@ -41,9 +42,9 @@ public final class ModConfig extends GroupOption<ModConfig> {
 
     public static class ItemSettings extends GroupOption<ItemSettings> {
         //? if >=1.21.11
-        public BooleanOption randomizeModels = add(new BooleanOption(true, "randomize_models", Component.literal("Randomize Item Models")));
-        public BooleanOption hideIds = add(new BooleanOption(true ,"hide_item_ids", Component.literal("Hide Item Ids")));
-        public BooleanOption shuffleItemGroups = add(new BooleanOption(false, "shuffle_item_groups", Component.literal("Shuffle Item Groups")));
+        public final BooleanOption randomizeModels = add(new BooleanOption(false, "randomize_models", Component.literal("Randomize Item Models")));
+        public final BooleanOption hideIds = add(new BooleanOption(true ,"hide_item_ids", Component.literal("Hide Item Ids")));
+        public final BooleanOption shuffleItemGroups = add(new BooleanOption(false, "shuffle_item_groups", Component.literal("Shuffle Item Groups")));
 
         @Override
         public String getName() {
@@ -51,9 +52,18 @@ public final class ModConfig extends GroupOption<ModConfig> {
         }
     }
 
+    public static class TextureSettings extends GroupOption<TextureSettings> {
+        public final BooleanOption shuffleAtlasTextures = add(new BooleanOption(false, "shuffle_atlas_textures", Component.literal("Shuffle Atlas Textures")));
+
+        @Override
+        public String getName() {
+            return "textures";
+        }
+    }
+
     public static class SeedSettings extends GroupOption<SeedSettings> {
-        public BooleanOption useSeed = add(new BooleanOption(false, "use_seed", Component.literal("Use Seed")));
-        public LongOption seed = add(new LongOption(0, "seed", Component.literal("Seed")));
+        public final BooleanOption useSeed = add(new BooleanOption(false, "use_seed", Component.literal("Use Seed")));
+        public final LongOption seed = add(new LongOption(0, "seed", Component.literal("Seed")));
 
         @Override
         public String getName() {

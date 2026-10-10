@@ -1,2 +1,5 @@
+### Added
+- Added an option to randomize textures (disabled by default)
+
 ### Fixed
-- Hopefully fixed game crashing on NeoForge 26.x
+- Fixed broken update checker url on NeoForge

@@ -55,6 +55,8 @@ neoForge {
         }
     }
 
+    accessTransformers.from("../../src/main/resources/META-INF/accesstransformer.cfg")
+
     runs {
         register("client") {
             gameDirectory = file("../../run/")

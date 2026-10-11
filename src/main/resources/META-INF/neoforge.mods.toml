@@ -18,6 +18,9 @@ updateJSONURL = "https://api.modrinth.com/updates/text-randomizer/forge_updates.
 [[mixins]]
 config = "text_randomizer.mixins.json"
 
+[[accessTransformers]]
+file="META-INF/accesstransformer.cfg"
+
 [[dependencies.${id}]]
 modId = "minecraft"
 type = "required"
